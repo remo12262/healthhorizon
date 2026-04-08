@@ -949,6 +949,7 @@ nav {
 </div>
 </div>
 </div>
+</div>
 
 <!-- ══════════════════════════════════════════════════
      PANEL 3: ELIGIBILITÀ
@@ -1489,6 +1490,32 @@ function calcolaEligibilita() {
       </div>
     </div>
   `;
+}
+
+/* ══════════════ ACCESS CODE ══════════════ */
+const ACCESS_CODE = 'Remoclaude123';
+
+function checkAccessCode() {
+  const input = document.getElementById('access-code-input').value;
+  const err = document.getElementById('access-error');
+  if (input === ACCESS_CODE) {
+    document.getElementById('access-gate').style.display = 'none';
+    document.getElementById('assistant-content').style.display = 'block';
+    sessionStorage.setItem('hh_access', '1');
+  } else {
+    err.style.display = 'block';
+    document.getElementById('access-code-input').style.borderColor = 'var(--red)';
+  }
+}
+
+// Restore session if already authenticated
+if (sessionStorage.getItem('hh_access') === '1') {
+  window.addEventListener('DOMContentLoaded', () => {
+    const gate = document.getElementById('access-gate');
+    const content = document.getElementById('assistant-content');
+    if (gate) gate.style.display = 'none';
+    if (content) content.style.display = 'block';
+  });
 }
 
 /* ══════════════ INIT ══════════════ */
