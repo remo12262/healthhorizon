@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
 <meta charset="UTF-8">
@@ -40,6 +39,7 @@ justify-content:space-between;
 border-bottom:1px solid var(--border);
 position:sticky;
 top:0;
+z-index:100;
 }
 
 .nav-logo{display:flex;align-items:center;gap:10px;}
@@ -79,6 +79,7 @@ margin-bottom:20px;
 
 .hero h1 em{
 color:var(--green2);
+font-style:normal;
 }
 
 .hero-sub{
@@ -91,16 +92,20 @@ margin-bottom:30px;
 
 /* BUTTONS */
 .btn{
+display:inline-block;
 padding:12px 25px;
 border-radius:4px;
 text-decoration:none;
 font-size:14px;
+font-family:'DM Sans',sans-serif;
+transition:0.2s;
 }
 
 .btn-green{
 background:var(--green2);
 color:#fff;
 }
+.btn-green:hover{background:var(--green);}
 
 .btn-ghost{
 border:1px solid var(--border);
@@ -159,12 +164,22 @@ grid-template-columns:1fr 1fr;
 gap:20px;
 }
 
+@media(max-width:640px){
+.apps-grid{grid-template-columns:1fr;}
+.hero h1{font-size:28px;}
+nav{padding:0 1rem;}
+.nav-links{display:none;}
+}
+
 .card{
 background:#fff;
 border:1px solid var(--border);
-padding:25px;
+padding:28px;
 border-radius:6px;
 transition:0.3s;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
 .card:hover{
@@ -172,29 +187,156 @@ transform:translateY(-3px);
 box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
+.card h3{
+font-family:'Playfair Display',serif;
+font-size:20px;
+color:var(--ink);
+}
+
+.card p{
+color:var(--mid);
+font-size:14px;
+line-height:1.6;
+flex:1;
+}
+
+.card-tag{
+display:inline-block;
+font-family:'DM Mono',monospace;
+font-size:10px;
+color:var(--green2);
+background:#eef7f2;
+border:1px solid #c8e8d5;
+padding:3px 10px;
+border-radius:20px;
+}
+
+.card-link{
+display:inline-flex;
+align-items:center;
+gap:6px;
+margin-top:6px;
+padding:10px 18px;
+background:var(--green2);
+color:#fff;
+border-radius:4px;
+text-decoration:none;
+font-size:13px;
+font-weight:500;
+transition:0.2s;
+align-self:flex-start;
+}
+.card-link:hover{background:var(--green);}
+
+.card-link-ghost{
+display:inline-flex;
+align-items:center;
+gap:6px;
+margin-top:6px;
+padding:10px 18px;
+background:transparent;
+color:var(--mid);
+border:1px solid var(--border);
+border-radius:4px;
+text-decoration:none;
+font-size:13px;
+font-weight:500;
+transition:0.2s;
+align-self:flex-start;
+}
+.card-link-ghost:hover{color:var(--ink);border-color:var(--mid);}
+
+.coming-soon{
+display:inline-block;
+font-family:'DM Mono',monospace;
+font-size:10px;
+color:var(--mid);
+background:var(--cream);
+border:1px solid var(--border);
+padding:3px 10px;
+border-radius:20px;
+}
+
+/* VISIONE */
+.visione-grid{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:16px;
+margin-top:30px;
+}
+
+@media(max-width:640px){.visione-grid{grid-template-columns:1fr;}}
+
+.visione-item{
+background:#fff;
+border:1px solid var(--border);
+border-radius:6px;
+padding:20px;
+}
+
+.visione-item h4{
+font-family:'Playfair Display',serif;
+font-size:16px;
+margin-bottom:8px;
+color:var(--ink);
+}
+
+.visione-item p{
+font-size:13px;
+color:var(--mid);
+line-height:1.6;
+}
+
 /* ECOSYSTEM */
 .ecosystem{
-background:#eef2ef;
-padding:40px;
+background:var(--ink);
+padding:50px 20px;
 text-align:center;
 }
 
 .ecosystem h3{
 font-family:'Playfair Display',serif;
+font-size:24px;
+color:#fff;
 margin-bottom:10px;
 }
 
 .ecosystem p{
-color:var(--mid);
+color:rgba(255,255,255,0.5);
+font-size:14px;
+margin-bottom:24px;
 }
+
+.ecosystem-links{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.eco-link{
+text-decoration:none;
+font-family:'DM Mono',monospace;
+font-size:12px;
+color:rgba(255,255,255,0.6);
+border:1px solid rgba(255,255,255,0.15);
+padding:8px 18px;
+border-radius:4px;
+transition:0.2s;
+}
+.eco-link:hover{color:#fff;border-color:rgba(255,255,255,0.4);}
 
 /* FOOTER */
 footer{
 background:#eef2ef;
-padding:20px;
+padding:24px 20px;
 text-align:center;
 color:var(--mid);
+font-size:13px;
 }
+
+footer a{color:var(--green2);text-decoration:none;}
+footer a:hover{text-decoration:underline;}
 </style>
 
 </head>
@@ -202,76 +344,99 @@ color:var(--mid);
 <body>
 
 <nav>
-<div class="nav-logo">
-<div class="nav-cross">+</div>
-<div class="nav-name">HealthHorizon</div>
-</div>
-
-<div class="nav-links">
-<a href="#apps">Piattaforme</a>
-<a href="#pnrr">PNRR</a>
-<a href="#visione">Visione</a>
-</div>
+  <div class="nav-logo">
+    <div class="nav-cross">+</div>
+    <div class="nav-name">HealthHorizon</div>
+  </div>
+  <div class="nav-links">
+    <a href="#apps">Piattaforme</a>
+    <a href="#visione">Visione</a>
+    <a href="https://sentinellaai.onrender.com" target="_blank">SentinellaAI</a>
+    <a href="pnrr.html">PNRR Intelligence</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-
 <div class="hero">
-<h1>Intelligenza artificiale<br>per la <em>sanità pubblica</em></h1>
+  <h1>Intelligenza artificiale<br>per la <em>sanità pubblica</em></h1>
+  <p class="hero-sub">
+    Piattaforme AI per ASL, Regioni e Ministero della Salute.<br>
+    Dalla sorveglianza epidemiologica alla gestione PNRR.
+  </p>
+  <a href="#apps" class="btn btn-green">Scopri le piattaforme</a>&nbsp;&nbsp;
+  <a href="#visione" class="btn btn-ghost">La visione</a>
 
-<p class="hero-sub">
-Piattaforme AI per ASL, Regioni e Ministero della Salute.
-Dalla sorveglianza epidemiologica alla gestione PNRR.
-</p>
-
-<a href="#apps" class="btn btn-green">Scopri le piattaforme</a> <a href="#visione" class="btn btn-ghost">La visione</a>
-
-<div class="hero-stats">
-<div><div class="stat-n">2</div><div class="stat-l">Piattaforme</div></div>
-<div><div class="stat-n">SSN</div><div class="stat-l">Target</div></div>
-<div><div class="stat-n">PNRR</div><div class="stat-l">Missione 6</div></div>
-</div>
+  <div class="hero-stats">
+    <div><div class="stat-n">2</div><div class="stat-l">Piattaforme attive</div></div>
+    <div><div class="stat-n">SSN</div><div class="stat-l">Target</div></div>
+    <div><div class="stat-n">PNRR</div><div class="stat-l">Missione 6</div></div>
+    <div><div class="stat-n">€15,6 Mld</div><div class="stat-l">Fondi monitorati</div></div>
+  </div>
 </div>
 
 <!-- APPS -->
-
 <section class="section" id="apps">
-<h2 class="sec-title">Piattaforme AI</h2>
-<p class="sec-sub">Strumenti concreti per la sanità pubblica italiana</p>
+  <h2 class="sec-title">Piattaforme AI</h2>
+  <p class="sec-sub">Strumenti concreti per la sanità pubblica italiana</p>
 
-<div class="apps-grid">
+  <div class="apps-grid">
 
-<div class="card">
-<h3>SentinellaAI</h3>
-<p>Monitoraggio epidemiologico predittivo per il SSN</p>
-</div>
+    <div class="card">
+      <span class="card-tag">✦ Attivo</span>
+      <h3>SentinellaAI</h3>
+      <p>Monitoraggio epidemiologico predittivo per il Servizio Sanitario Nazionale. Analisi dei trend, allerta precoce e sorveglianza territoriale in tempo reale.</p>
+      <a href="https://sentinellaai.onrender.com" target="_blank" class="card-link">
+        Accedi alla piattaforma →
+      </a>
+    </div>
 
-<div class="card">
-<h3>PNRR Sanità Intelligence</h3>
-<p>Gestione intelligente dei progetti PNRR sanitari</p>
-</div>
+    <div class="card">
+      <span class="card-tag">✦ Attivo</span>
+      <h3>PNRR Sanità Intelligence</h3>
+      <p>Gestione intelligente dei progetti PNRR sanitari. Tracker Missione 6, assistente AI per la rendicontazione e calcolatore di eligibilità per enti e ASL.</p>
+      <a href="pnrr.html" class="card-link">
+        Accedi alla piattaforma →
+      </a>
+    </div>
 
-</div>
+  </div>
 </section>
 
 <!-- VISIONE -->
-
 <section class="section" id="visione">
-<h2 class="sec-title">Visione</h2>
-<p class="sec-sub">
-L'intelligenza artificiale come leva strategica per il futuro del Servizio Sanitario Nazionale.
-</p>
+  <h2 class="sec-title">Visione</h2>
+  <p class="sec-sub">L'intelligenza artificiale come leva strategica per il futuro del Servizio Sanitario Nazionale.</p>
+
+  <div class="visione-grid">
+    <div class="visione-item">
+      <h4>Sorveglianza predittiva</h4>
+      <p>Anticipare le emergenze epidemiologiche prima che diventino crisi, con modelli AI addestrati sui dati SSN.</p>
+    </div>
+    <div class="visione-item">
+      <h4>Gestione PNRR</h4>
+      <p>Supportare ASL e Regioni nella rendicontazione e nel rispetto delle milestone della Missione 6 Salute.</p>
+    </div>
+    <div class="visione-item">
+      <h4>Interoperabilità</h4>
+      <p>Connettere FSE, CUP e sistemi regionali in un ecosistema di dati sanitari sicuro e accessibile.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ECOSYSTEM -->
-
 <div class="ecosystem">
-<h3>QuantumHorizon Ecosystem</h3>
-<p>AI italiana per sanità, sicurezza e pubblica amministrazione</p>
+  <h3>QuantumHorizon Ecosystem</h3>
+  <p>AI italiana per sanità, sicurezza e pubblica amministrazione</p>
+  <div class="ecosystem-links">
+    <a href="https://quantumhorizon.it" target="_blank" class="eco-link">QuantumHorizon.it</a>
+    <a href="https://sentinellaai.onrender.com" target="_blank" class="eco-link">SentinellaAI</a>
+    <a href="pnrr.html" class="eco-link">PNRR Intelligence</a>
+  </div>
 </div>
 
 <footer>
-© 2025 HealthHorizon · Made in Italy
+  © 2025 HealthHorizon · Made in Italy ·
+  <a href="mailto:info@healthhorizon.it">info@healthhorizon.it</a>
 </footer>
 
 </body>
