@@ -877,32 +877,7 @@ nav {
 ═══════════════════════════════════════════════════ -->
 <div class="panel" id="panel-assistant">
 
-<div id="access-gate" style="display:flex;align-items:center;justify-content:center;min-height:500px;padding:2rem">
-  <div style="background:#FAFAF7;border:1px solid rgba(28,26,22,0.12);border-radius:14px;padding:2.5rem;max-width:420px;width:100%;text-align:center">
-    <div style="font-size:44px;margin-bottom:1rem">&#128272;</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#1C1A16;margin-bottom:8px">Accesso Riservato</div>
-    <div style="font-size:13px;color:#8A857C;line-height:1.7;margin-bottom:1.5rem">
-      L'Assistente AI &egrave; disponibile per enti accreditati e partner istituzionali.<br>
-      Inserisci il codice di accesso ricevuto da HealthHorizon.
-    </div>
-    <input type="password" id="access-code-input" placeholder="Codice di accesso"
-      style="width:100%;padding:12px 16px;border:1px solid rgba(28,26,22,0.12);border-radius:8px;background:#F2EFE9;font-size:14px;color:#1C1A16;outline:none;margin-bottom:10px;text-align:center;letter-spacing:0.12em;font-family:sans-serif"
-      onkeydown="if(event.key==='Enter') checkAccessCode()">
-    <div id="access-error" style="font-size:12px;color:#8B1A1A;margin-bottom:10px;display:none">
-      Codice non valido. Contatta <strong>info@healthhorizon.it</strong>
-    </div>
-    <button onclick="checkAccessCode()"
-      style="width:100%;padding:13px;background:#1C1A16;color:#FAFAF7;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:0.04em">
-      Accedi &#8594;
-    </button>
-    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(28,26,22,0.12)">
-      <div style="font-size:11px;color:#8A857C;margin-bottom:4px">Vuoi richiedere l'accesso?</div>
-      <a href="mailto:info@healthhorizon.it" style="font-size:12px;color:#1A4A7A;font-weight:600;text-decoration:none">info@healthhorizon.it</a>
-    </div>
-  </div>
-</div>
-
-<div id="assistant-content" style="display:none">
+<div id="assistant-content">
 <div style="padding:2rem 2rem 1rem">
   <div class="section-title">Assistente AI — Rendicontazione PNRR</div>
   <div class="section-sub">Carica i tuoi documenti di progetto. L'AI analizza, segnala criticità e suggerisce azioni correttive.</div>
@@ -1312,19 +1287,18 @@ async function callAI(appendMode) {
   try {
     const messages = conversationHistory.filter(m => m.role !== 'system');
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(API_BASE + '/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: 'Sei un esperto PNRR Missione 6 Salute e rendicontazione fondi pubblici europei. Rispondi sempre in italiano. Usa un linguaggio professionale ma chiaro. Fornisci analisi concrete con riferimenti normativi. Usa ⚠️ per criticità, ✅ per elementi positivi, 🔴 per urgenze, 📋 per checklist.',
-        messages: messages
-      })
+      body: JSON.stringify({ messages: messages })
     });
 
     const data = await res.json();
-    const rawText = data.content?.[0]?.text || 'Risposta non disponibile.';
+    if (!res.ok) {
+      conversationHistory.pop();
+      throw new Error(data.detail || 'Risposta non disponibile.');
+    }
+    const rawText = data.content || 'Risposta non disponibile.';
 
     conversationHistory.push({ role: 'assistant', content: rawText });
 
@@ -1344,7 +1318,11 @@ async function callAI(appendMode) {
     document.getElementById('analysis-status').textContent = 'Analisi completata';
 
   } catch(e) {
-    body.innerHTML += `<div style="color:var(--red);font-size:13px;padding:1rem">Errore di connessione. Verifica che il backend sia attivo.</div>`;
+    const errBox = document.createElement('div');
+    errBox.style.cssText = 'color:var(--red);font-size:13px;padding:1rem';
+    errBox.textContent = (e && e.message && e.message !== 'Failed to fetch') ? e.message : 'Servizio momentaneamente non raggiungibile. Riprova tra qualche istante.';
+    if (!appendMode) body.innerHTML = '';
+    body.appendChild(errBox);
     document.getElementById('analysis-status').textContent = 'Errore';
   }
 
@@ -1518,32 +1496,6 @@ function calcolaEligibilita() {
       </div>
     </div>
   `;
-}
-
-/* ══════════════ ACCESS CODE ══════════════ */
-const ACCESS_CODE = 'Remoclaude123';
-
-function checkAccessCode() {
-  const input = document.getElementById('access-code-input').value;
-  const err = document.getElementById('access-error');
-  if (input === ACCESS_CODE) {
-    document.getElementById('access-gate').style.display = 'none';
-    document.getElementById('assistant-content').style.display = 'block';
-    sessionStorage.setItem('hh_access', '1');
-  } else {
-    err.style.display = 'block';
-    document.getElementById('access-code-input').style.borderColor = 'var(--red)';
-  }
-}
-
-// Restore session if already authenticated
-if (sessionStorage.getItem('hh_access') === '1') {
-  window.addEventListener('DOMContentLoaded', () => {
-    const gate = document.getElementById('access-gate');
-    const content = document.getElementById('assistant-content');
-    if (gate) gate.style.display = 'none';
-    if (content) content.style.display = 'block';
-  });
 }
 
 /* ══════════════ INIT ══════════════ */
