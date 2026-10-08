@@ -5,6 +5,7 @@ import os
 
 from limits import rate_limit, try_consume_ai_call, ai_usage
 import costs
+import sentinella
 
 app = FastAPI(title="HealthHorizon API", version="1.1.0")
 
@@ -12,6 +13,7 @@ ALLOWED_ORIGINS = [
     "https://healthhorizon.it",
     "https://www.healthhorizon.it",
     "https://healthhorizon.onrender.com",
+    "https://sentinellaai.onrender.com",
     "http://localhost:5173",
     "http://localhost:8000",
 ] + [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
@@ -38,6 +40,10 @@ LIMIT_MSG = (
     "L'assistente AI ha raggiunto il limite giornaliero di richieste. "
     "Riprova domani: il Tracker M6 e il Calcolatore di eligibilità restano consultabili."
 )
+
+
+# API di SentinellaAI (il servizio separato sentinellaai-api non risponde)
+app.include_router(sentinella.router)
 
 
 @app.get("/")
