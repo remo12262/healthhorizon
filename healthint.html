@@ -58,12 +58,12 @@
       <p>Enti regolatori, regioni, aziende sanitarie e ospedaliere, aziende farmaceutiche e gruppi privati, con le relazioni tra loro. Cliccando un nodo vedi descrizione, livello di rischio e collegamenti.</p>
     </div>
     <div class="feature">
-      <h3>Alert</h3>
-      <p>Alert generati dall'AI a partire dalle entità e dalle relazioni con il rischio più alto, con impatto atteso, orizzonte temporale e azione consigliata. Sono ipotesi da verificare, non previsioni validate. Se la generazione non riesce, la pagina lo segnala.</p>
+      <h3>Alert e segnalazioni</h3>
+      <p>Ultimi focolai segnalati dall'OMS e richiami FDA più recenti, direttamente dalle fonti. A questi si aggiungono gli alert generati dall'AI sulle entità a rischio più alto: ipotesi da verificare, non previsioni validate. Se la generazione non riesce, la pagina lo segnala.</p>
     </div>
     <div class="feature">
       <h3>Risk Score</h3>
-      <p>Classifica da 0 a 100 delle entità più a rischio. Per le aziende con richiami dipende dalla classe del richiamo FDA (Classe I: 85, Classe II: 55, Classe III: 25).</p>
+      <p>Classifica da 0 a 100 delle entità più a rischio, con il motivo di ogni punteggio. Per le aziende con richiami è ricalcolato a ogni aggiornamento: classe del richiamo FDA (I: 85, II: 55, III: 25) pesata per la recenza (100% entro 90 giorni, 75% entro un anno, 50% oltre).</p>
     </div>
     <div class="feature">
       <h3>Aggiorna dati</h3>
@@ -102,7 +102,7 @@
   <ul>
     <li>I dati sui richiami provengono dalla FDA statunitense: la distribuzione in Italia è quella dichiarata nel richiamo e non sostituisce le comunicazioni di AIFA e del Ministero della Salute.</li>
     <li>Gli alert sono generati dall'AI e possono contenere errori: vanno verificati sulle fonti.</li>
-    <li>Il punteggio di rischio è una regola semplice (classe del richiamo e valutazione dell'AI), non un modello statistico validato.</li>
+    <li>Il punteggio di rischio è una regola semplice (classe e recenza del richiamo, valutazione dell'AI o valore manuale), non un modello statistico validato.</li>
     <li>Il grafo copre solo una parte del SSN: gli enti italiani di partenza sono un insieme limitato inserito a mano.</li>
   </ul>
 </section>
