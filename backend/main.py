@@ -4,6 +4,7 @@ import anthropic
 import os
 
 from limits import rate_limit, try_consume_ai_call, ai_usage
+import costs
 
 app = FastAPI(title="HealthHorizon API", version="1.1.0")
 
@@ -49,6 +50,12 @@ def health():
     return {"status": "ok", "ai_calls_today": ai_usage()}
 
 
+@app.get("/ai-costs")
+def ai_costs():
+    """Registro dei costi giornalieri delle chiamate a Claude."""
+    return costs.report()
+
+
 def _clean_messages(raw) -> list:
     if not isinstance(raw, list) or not raw:
         raise HTTPException(400, "Nessun messaggio da analizzare.")
@@ -88,6 +95,7 @@ async def analyze(payload: dict):
     except anthropic.APIError as e:
         print(f"[analyze] Claude error: {type(e).__name__}: {e}")
         raise HTTPException(502, "Servizio AI momentaneamente non disponibile. Riprova tra qualche minuto.")
+    costs.record(MODEL, response, "analyze")
     text = "".join(b.text for b in response.content if b.type == "text")
     return {
         "content": text,
