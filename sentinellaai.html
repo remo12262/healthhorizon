@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SentinellaAI — Come funziona | HealthHorizon</title>
+<meta name="description" content="Assistente AI per la sorveglianza epidemiologica: risponde su focolai e malattie infettive, simula scenari di impatto sul SSN e prepara bozze di report.">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LL6B74T4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9LL6B74T4F');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="piattaforme.css">
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-cross">+</div>
+    <div class="nav-name">HealthHorizon</div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#come-funziona">Come funziona</a>
+    <a href="index.html#apps">Piattaforme</a>
+    <a href="sentinellaai.html">SentinellaAI</a>
+    <a href="pnrr-intelligence.html">PNRR</a>
+    <a href="healthint.html">HEALTHINT</a>
+    <a href="sanitapro.html">SanitàPro</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <span class="tag">Sorveglianza epidemiologica</span>
+  <h1>SentinellaAI</h1>
+  <p class="lead">Assistente AI per la sorveglianza epidemiologica: risponde su focolai e malattie infettive, simula scenari di impatto sul SSN e prepara bozze di report.</p>
+  <p class="for-whom"><strong>Per chi:</strong> epidemiologi, servizi di igiene e prevenzione, direzioni sanitarie delle ASL.</p>
+  <a href="https://sentinellaai.onrender.com" class="btn btn-green" target="_blank" rel="noopener">Accedi alla piattaforma →</a>
+</header>
+
+<main>
+
+<section class="block">
+  <h2>Il problema che affronta</h2>
+  <p>Chi si occupa di sorveglianza deve leggere ogni giorno bollettini e notizie da molte fonti (OMS, ECDC, ISS, stampa) e trasformarli in fretta in sintesi, scenari e note per la direzione.</p><p>SentinellaAI aiuta in questo lavoro di lettura e prima stesura: risponde a domande in italiano, abbozza scenari e report che poi l'esperto verifica e completa.</p>
+</section>
+
+<section class="block">
+  <h2>Cosa puoi fare</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>Analisi AI</h3>
+      <p>Fai domande in linguaggio naturale su focolai, virus e malattie infettive. Per questi argomenti, quando la ricerca web è attiva, la piattaforma recupera notizie recenti e le passa all'AI con l'indirizzo della fonte. Se mancano dati verificati, l'AI lo dice invece di inventare numeri.</p>
+    </div>
+    <div class="feature">
+      <h3>Simulatore di scenario</h3>
+      <p>Imposti l'aumento dell'incidenza delle sindromi simil-influenzali, la durata in settimane, la copertura vaccinale e la fascia d'età. L'AI restituisce una stima qualitativa di casi, ricoveri, accessi in pronto soccorso e saturazione, con una raccomandazione.</p>
+    </div>
+    <div class="feature">
+      <h3>Report</h3>
+      <p>Genera una bozza di report formale, con sezioni numerate, da rivedere prima di qualsiasi uso.</p>
+    </div>
+    <div class="feature">
+      <h3>Cruscotto e mappa delle regioni</h3>
+      <p>Mostrano come potrebbe apparire un cruscotto di sorveglianza. I valori sono dimostrativi: non provengono da dati di sorveglianza reali.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Come si usa</h2>
+  <ol class="steps">
+    <li>Apri la piattaforma: non serve registrarsi. Leggi l'avviso in alto sulla natura prototipale dei dati.</li>
+    <li>In <strong>Analisi AI</strong> scegli tra Chat e Report formale, poi scrivi la domanda o usa una delle domande rapide.</li>
+    <li>Nel <strong>Simulatore</strong> imposta i parametri dello scenario e avvia la simulazione.</li>
+    <li>Prima di usare numeri o conclusioni, verificali su OMS, ECDC e ISS.</li>
+  </ol>
+</section>
+
+<section class="block">
+  <h2>Fonti dei dati e aggiornamento</h2>
+  <table class="sources">
+    <thead><tr><th>Contenuto</th><th>Fonte</th><th>Aggiornamento</th></tr></thead>
+    <tbody>
+      <tr><td>Risposte, simulazioni e report</td><td>Modello AI Claude (Anthropic), sulla base delle sue conoscenze</td><td>Generati al momento della richiesta</td></tr>
+      <tr><td>Notizie recenti su focolai ed epidemie</td><td>Ricerca web (servizio Tavily), solo per alcuni argomenti e solo se attiva</td><td>Al momento della domanda</td></tr>
+      <tr><td>Cruscotto e mappa delle regioni</td><td>Valori dimostrativi inseriti nella pagina</td><td>Non aggiornati</td></tr>
+    </tbody>
+  </table>
+  <p>SentinellaAI non è collegata ai sistemi di sorveglianza ufficiali (per esempio RespiVirNet dell'ISS) né ai dati del Ministero della Salute.</p>
+</section>
+
+<section class="block">
+  <h2>Limiti</h2>
+  <div class="notice"><strong>Strumento di supporto alle decisioni.</strong> Le risposte dell'AI possono contenere errori o informazioni non aggiornate e vanno sempre verificate sulle fonti ufficiali.</div>
+  <ul>
+    <li>È un prototipo: non usa dati di sorveglianza ufficiali e il cruscotto è dimostrativo.</li>
+    <li>Il simulatore non è un modello epidemiologico validato: produce una proiezione ragionata dall'AI, utile per discutere, non per pianificare.</li>
+    <li>Non sostituisce bollettini e comunicazioni ufficiali di ISS, ECDC e OMS.</li>
+    <li>Per contenere i costi, le richieste all'AI sono limitate (10 all'ora per utente e un tetto giornaliero complessivo).</li>
+  </ul>
+</section>
+
+</main>
+
+<div class="cta">
+  <p>Gratuita e senza registrazione.</p>
+  <a href="https://sentinellaai.onrender.com" class="btn btn-green" target="_blank" rel="noopener">Accedi alla piattaforma →</a>
+  &nbsp;
+  <a href="index.html#apps" class="btn btn-ghost">Tutte le piattaforme</a>
+</div>
+
+<footer>
+  © 2025 HealthHorizon · Made in Italy ·
+  <a href="index.html">Torna alla home</a> ·
+  <a href="mailto:info@healthhorizon.it">info@healthhorizon.it</a>
+</footer>
+
+</body>
+</html>

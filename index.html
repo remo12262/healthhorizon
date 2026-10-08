@@ -265,6 +265,66 @@ padding:3px 10px;
 border-radius:20px;
 }
 
+.card-for{
+font-size:13px;
+color:var(--ink);
+line-height:1.5;
+}
+.card-for strong{font-weight:600;}
+
+.card ul{
+margin:0 0 0 18px;
+color:var(--mid);
+font-size:14px;
+line-height:1.6;
+flex:1;
+}
+.card ul li{margin-bottom:4px;}
+
+.card-actions{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+align-items:center;
+}
+
+/* COME FUNZIONA */
+.steps{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
+counter-reset:step;
+}
+@media(max-width:640px){.steps{grid-template-columns:1fr;}}
+.step{
+background:#fff;
+border:1px solid var(--border);
+border-radius:6px;
+padding:20px;
+position:relative;
+}
+.step::before{
+counter-increment:step;
+content:counter(step);
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:28px;height:28px;
+border-radius:50%;
+background:var(--green2);
+color:#fff;
+font-weight:600;
+font-size:14px;
+margin-bottom:10px;
+}
+.step h4{
+font-family:'Playfair Display',serif;
+font-size:16px;
+margin-bottom:6px;
+color:var(--ink);
+}
+.step p{font-size:13px;color:var(--mid);line-height:1.6;}
+
 /* VISIONE */
 .visione-grid{
 display:grid;
@@ -357,10 +417,9 @@ footer a:hover{text-decoration:underline;}
     <div class="nav-name">HealthHorizon</div>
   </div>
   <div class="nav-links">
+    <a href="#come-funziona">Come funziona</a>
     <a href="#apps">Piattaforme</a>
     <a href="#visione">Visione</a>
-    <a href="https://sentinellaai.onrender.com" target="_blank">SentinellaAI</a>
-    <a href="pnrr.html">PNRR Intelligence</a>
   </div>
 </nav>
 
@@ -368,7 +427,7 @@ footer a:hover{text-decoration:underline;}
 <div class="hero">
   <h1>Intelligenza artificiale<br>per la <em>sanità pubblica</em></h1>
   <p class="hero-sub">
-    Piattaforme AI per ASL, Regioni e Ministero della Salute.<br>
+    Piattaforme AI gratuite per ASL, Regioni e professionisti del SSN.<br>
     Dalla sorveglianza epidemiologica alla gestione PNRR.
   </p>
   <a href="#apps" class="btn btn-green">Scopri le piattaforme</a>&nbsp;&nbsp;
@@ -376,11 +435,31 @@ footer a:hover{text-decoration:underline;}
 
   <div class="hero-stats">
     <div><div class="stat-n">4</div><div class="stat-l">Piattaforme attive</div></div>
-    <div><div class="stat-n">SSN</div><div class="stat-l">Target</div></div>
+    <div><div class="stat-n">SSN</div><div class="stat-l">Destinatari</div></div>
     <div><div class="stat-n">PNRR</div><div class="stat-l">Missione 6</div></div>
-    <div><div class="stat-n">€15,6 Mld</div><div class="stat-l">Fondi monitorati</div></div>
+    <div><div class="stat-n">Libero</div><div class="stat-l">Accesso senza registrazione</div></div>
   </div>
 </div>
+
+<!-- COME FUNZIONA -->
+<section class="section" id="come-funziona">
+  <h2 class="sec-title">Come funziona HealthHorizon</h2>
+  <p class="sec-sub">Quattro strumenti gratuiti, ognuno pensato per un lavoro preciso nel Servizio Sanitario Nazionale.</p>
+  <div class="steps">
+    <div class="step">
+      <h4>Scegli la piattaforma</h4>
+      <p>Parti dal tuo ruolo: sorveglianza epidemiologica, progetti PNRR, analisi del sistema sanitario o lavoro quotidiano nel SSN.</p>
+    </div>
+    <div class="step">
+      <h4>Consulta dati e assistente AI</h4>
+      <p>Esplora i dati pubblici raccolti dalla piattaforma, con fonte e data di aggiornamento, oppure fai domande in italiano all'assistente basato su Claude.</p>
+    </div>
+    <div class="step">
+      <h4>Verifica e decidi</h4>
+      <p>Controlla i risultati sulle fonti ufficiali indicate: sono un supporto alle decisioni, non le sostituiscono.</p>
+    </div>
+  </div>
+</section>
 
 <!-- APPS -->
 <section class="section" id="apps">
@@ -390,41 +469,67 @@ footer a:hover{text-decoration:underline;}
   <div class="apps-grid">
 
     <div class="card">
-      <span class="card-tag">✦ Attivo</span>
+      <span class="card-tag">Sorveglianza epidemiologica</span>
       <h3>SentinellaAI</h3>
-      <p>Monitoraggio epidemiologico predittivo per il Servizio Sanitario Nazionale. Analisi dei trend, allerta precoce e sorveglianza territoriale in tempo reale.</p>
-      <a href="https://sentinellaai.onrender.com" target="_blank" class="card-link">
-        Accedi alla piattaforma →
-      </a>
+      <p>Assistente AI per la sorveglianza epidemiologica: risponde su focolai e malattie infettive, simula scenari di impatto sul SSN e prepara bozze di report.</p>
+      <div class="card-for"><strong>Per chi:</strong> epidemiologi, servizi di igiene e prevenzione, direzioni sanitarie ASL.</div>
+      <ul>
+        <li>Fare domande in linguaggio naturale su focolai e malattie infettive.</li>
+        <li>Simulare uno scenario influenzale (aumento dei casi, durata, copertura vaccinale) e ottenere una stima qualitativa dell'impatto su ricoveri e pronto soccorso.</li>
+        <li>Generare una bozza di report formale da rivedere.</li>
+      </ul>
+      <div class="card-actions">
+        <a href="sentinellaai.html" class="card-link">Come funziona →</a>
+        <a href="https://sentinellaai.onrender.com" target="_blank" rel="noopener" class="card-link-ghost">Accedi</a>
+      </div>
     </div>
 
     <div class="card">
-      <span class="card-tag">✦ Attivo</span>
+      <span class="card-tag">PNRR · Missione 6 Salute</span>
       <h3>PNRR Sanità Intelligence</h3>
-      <p>Gestione intelligente dei progetti PNRR sanitari. Tracker Missione 6, assistente AI per la rendicontazione e calcolatore di eligibilità per enti e ASL.</p>
-      <a href="pnrr.html" class="card-link">
-        Accedi alla piattaforma →
-      </a>
+      <p>Strumenti di orientamento sulla Missione 6 Salute: quadro delle misure, calcolatore delle misure adatte al tuo ente e assistente AI su rendicontazione e milestone.</p>
+      <div class="card-for"><strong>Per chi:</strong> uffici PNRR e controllo di gestione di ASL e aziende ospedaliere, RUP, uffici regionali.</div>
+      <ul>
+        <li>Consultare un quadro riassuntivo delle misure M6 e dell'avanzamento per regione (dati inseriti manualmente, non aggiornati in automatico).</li>
+        <li>Individuare le misure potenzialmente adatte in base a tipo di ente, bacino di utenza e aree di interesse, con i documenti tipicamente richiesti.</li>
+        <li>Chiedere all'assistente AI checklist, scadenze e rischi di non conformità.</li>
+      </ul>
+      <div class="card-actions">
+        <a href="pnrr-intelligence.html" class="card-link">Come funziona →</a>
+        <a href="pnrr.html" class="card-link-ghost">Accedi</a>
+      </div>
     </div>
 
     <div class="card">
-      <span class="card-tag">✦ Nuovo</span>
+      <span class="card-tag">Health System Intelligence Graph</span>
       <h3>HEALTHINT</h3>
-      <p style="font-size:12px;color:var(--green2);font-family:'DM Mono',monospace;margin-bottom:4px;">Health System Intelligence Graph</p>
-      <p>Knowledge graph predittivo del SSN italiano. Mappa fondi integrativi, ASL, AGENAS, AIFA e gap SSN vs complementare. Alert predittivi in tempo reale.</p>
-      <a href="https://healthint-frontend.onrender.com" target="_blank" class="card-link">
-        Accedi alla piattaforma →
-      </a>
+      <p>Mappa a grafo di enti e aziende della sanità, arricchita con i richiami di farmaci e dispositivi medici (openFDA) e le notizie sui focolai dell'OMS; l'AI ne ricava alert di rischio.</p>
+      <div class="card-for"><strong>Per chi:</strong> analisti delle direzioni strategiche, farmacie ospedaliere e HTA, risk management.</div>
+      <ul>
+        <li>Esplorare enti, aziende e relazioni su un grafo interattivo.</li>
+        <li>Vedere i richiami recenti di farmaci e dispositivi distribuiti in Italia, secondo i dati della FDA statunitense.</li>
+        <li>Leggere gli alert generati dall'AI e la classifica di rischio, aggiornati due volte al giorno.</li>
+      </ul>
+      <div class="card-actions">
+        <a href="healthint.html" class="card-link">Come funziona →</a>
+        <a href="https://healthint-frontend.onrender.com" target="_blank" rel="noopener" class="card-link-ghost">Accedi</a>
+      </div>
     </div>
 
     <div class="card">
-      <span class="card-tag">✦ Attivo</span>
+      <span class="card-tag">Professionisti SSN</span>
       <h3>SanitàPro</h3>
-      <p style="font-size:12px;color:var(--green2);font-family:'DM Mono',monospace;margin-bottom:4px;">Assistente AI per i professionisti del SSN</p>
-      <p>Assistente basato sull'intelligenza artificiale per chi lavora nella sanità pubblica: domande su CCNL del comparto e della dirigenza sanitaria, normativa del personale e preparazione ai concorsi, con l'elenco dei concorsi in sanità pubblicati di recente. Gratuito e senza registrazione.</p>
-      <a href="https://www.lavorossn.it" target="_blank" class="card-link">
-        Accedi alla piattaforma →
-      </a>
+      <p>Assistente AI gratuito per chi lavora nel SSN: risponde su CCNL, normativa del personale e concorsi, ed elenca i concorsi in sanità pubblicati di recente.</p>
+      <div class="card-for"><strong>Per chi:</strong> infermieri, OSS, tecnici, medici, personale amministrativo e candidati ai concorsi.</div>
+      <ul>
+        <li>Fare domande su CCNL del comparto e della dirigenza, permessi, incarichi e mobilità.</li>
+        <li>Prepararsi ai concorsi con l'aiuto dell'assistente.</li>
+        <li>Consultare i concorsi in sanità degli ultimi 45 giorni, dalle notizie di ticonsiglio.com, aggiornati al massimo ogni 6 ore.</li>
+      </ul>
+      <div class="card-actions">
+        <a href="sanitapro.html" class="card-link">Come funziona →</a>
+        <a href="https://www.lavorossn.it" target="_blank" rel="noopener" class="card-link-ghost">Accedi</a>
+      </div>
     </div>
 
   </div>
@@ -437,8 +542,8 @@ footer a:hover{text-decoration:underline;}
 
   <div class="visione-grid">
     <div class="visione-item">
-      <h4>Sorveglianza predittiva</h4>
-      <p>Anticipare le emergenze epidemiologiche prima che diventino crisi, con modelli AI addestrati sui dati SSN.</p>
+      <h4>Sorveglianza epidemiologica</h4>
+      <p>Aiutare chi fa sorveglianza a leggere più in fretta segnali e notizie sui focolai, con l'AI come supporto all'analisi.</p>
     </div>
     <div class="visione-item">
       <h4>Gestione PNRR</h4>
@@ -446,7 +551,7 @@ footer a:hover{text-decoration:underline;}
     </div>
     <div class="visione-item">
       <h4>Interoperabilità</h4>
-      <p>Connettere FSE, CUP e sistemi regionali in un ecosistema di dati sanitari sicuro e accessibile.</p>
+      <p>Obiettivo futuro: collegare FSE, CUP e sistemi regionali in un ecosistema di dati sanitari sicuro. Oggi le piattaforme usano solo dati pubblici.</p>
     </div>
   </div>
 </section>

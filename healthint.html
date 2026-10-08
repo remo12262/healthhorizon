@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEALTHINT — Come funziona | HealthHorizon</title>
+<meta name="description" content="Mappa a grafo di enti e aziende della sanità, arricchita con i richiami di farmaci e dispositivi medici (openFDA) e le notizie sui focolai dell&#x27;OMS. Dai dati l&#x27;AI ricava alert di rischio.">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LL6B74T4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9LL6B74T4F');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="piattaforme.css">
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-cross">+</div>
+    <div class="nav-name">HealthHorizon</div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#come-funziona">Come funziona</a>
+    <a href="index.html#apps">Piattaforme</a>
+    <a href="sentinellaai.html">SentinellaAI</a>
+    <a href="pnrr-intelligence.html">PNRR</a>
+    <a href="healthint.html">HEALTHINT</a>
+    <a href="sanitapro.html">SanitàPro</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <span class="tag">Health System Intelligence Graph</span>
+  <h1>HEALTHINT</h1>
+  <p class="lead">Mappa a grafo di enti e aziende della sanità, arricchita con i richiami di farmaci e dispositivi medici (openFDA) e le notizie sui focolai dell'OMS. Dai dati l'AI ricava alert di rischio.</p>
+  <p class="for-whom"><strong>Per chi:</strong> analisti delle direzioni strategiche, farmacie ospedaliere e HTA, risk management, ricercatori di politiche sanitarie.</p>
+  <a href="https://healthint-frontend.onrender.com" class="btn btn-green" target="_blank" rel="noopener">Accedi alla piattaforma →</a>
+</header>
+
+<main>
+
+<section class="block">
+  <h2>Il problema che affronta</h2>
+  <p>I segnali di rischio per il sistema sanitario, come i richiami di farmaci e dispositivi medici o i focolai segnalati all'estero, sono sparsi tra fonti diverse, spesso in inglese. È difficile vedere a colpo d'occhio quali aziende ed enti sono coinvolti e come sono collegati.</p><p>HEALTHINT raccoglie questi segnali da fonti pubbliche, li collega in un grafo di enti e aziende e chiede all'AI di evidenziare i rischi principali.</p>
+</section>
+
+<section class="block">
+  <h2>Cosa puoi fare</h2>
+  <div class="features">
+    <div class="feature">
+      <h3>Grafo</h3>
+      <p>Enti regolatori, regioni, aziende sanitarie e ospedaliere, aziende farmaceutiche e gruppi privati, con le relazioni tra loro. Cliccando un nodo vedi descrizione, livello di rischio e collegamenti.</p>
+    </div>
+    <div class="feature">
+      <h3>Alert</h3>
+      <p>Alert generati dall'AI a partire dalle entità e dalle relazioni con il rischio più alto, con impatto atteso, orizzonte temporale e azione consigliata. Sono ipotesi da verificare, non previsioni validate. Se la generazione non riesce, la pagina lo segnala.</p>
+    </div>
+    <div class="feature">
+      <h3>Risk Score</h3>
+      <p>Classifica da 0 a 100 delle entità più a rischio. Per le aziende con richiami dipende dalla classe del richiamo FDA (Classe I: 85, Classe II: 55, Classe III: 25).</p>
+    </div>
+    <div class="feature">
+      <h3>Aggiorna dati</h3>
+      <p>In alto trovi data e ora dell'ultimo aggiornamento riuscito e le fonti. Il pulsante "Aggiorna dati" avvia un aggiornamento manuale, al massimo uno all'ora.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>Come si usa</h2>
+  <ol class="steps">
+    <li>Apri la piattaforma e controlla in alto la data dell'ultimo aggiornamento e le fonti.</li>
+    <li>Nella scheda <strong>Grafo</strong> esplora la mappa e clicca un nodo per vederne i dettagli.</li>
+    <li>Nelle schede <strong>Alert</strong> e <strong>Risk Score</strong> individua i rischi principali.</li>
+    <li>Verifica i singoli casi sulle fonti originali prima di trarre conclusioni.</li>
+  </ol>
+</section>
+
+<section class="block">
+  <h2>Fonti dei dati e aggiornamento</h2>
+  <table class="sources">
+    <thead><tr><th>Contenuto</th><th>Fonte</th><th>Aggiornamento</th></tr></thead>
+    <tbody>
+      <tr><td>Richiami di farmaci e dispositivi medici</td><td><a href="https://open.fda.gov" target="_blank" rel="noopener">openFDA</a> (FDA, Stati Uniti): richiami con distribuzione dichiarata in Italia, integrati dai richiami di Classe I a distribuzione mondiale</td><td>Due volte al giorno, più l'aggiornamento manuale</td></tr>
+      <tr><td>Focolai epidemici</td><td><a href="https://www.who.int/emergencies/disease-outbreak-news" target="_blank" rel="noopener">OMS – Disease Outbreak News</a>: le notizie più recenti vengono analizzate dall'AI per ricavare enti e relazioni</td><td>Due volte al giorno, più l'aggiornamento manuale</td></tr>
+      <tr><td>Enti del SSN di partenza (Ministero della Salute, AIFA, ISS, AGENAS, Regione Sicilia, aziende sanitarie di Messina e altri)</td><td>Inseriti manualmente come struttura di base del grafo</td><td>Non aggiornati in automatico</td></tr>
+      <tr><td>Alert e analisi delle notizie</td><td>Modello AI Claude (Anthropic)</td><td>A ogni aggiornamento</td></tr>
+    </tbody>
+  </table>
+  <p>HEALTHINT non riceve in automatico dati dal Ministero della Salute, da AGENAS o da AIFA.</p>
+</section>
+
+<section class="block">
+  <h2>Limiti</h2>
+  <div class="notice"><strong>Strumento di supporto alle decisioni.</strong> Alert e punteggi sono indicatori per orientare l'analisi, non valutazioni ufficiali su enti o aziende.</div>
+  <ul>
+    <li>I dati sui richiami provengono dalla FDA statunitense: la distribuzione in Italia è quella dichiarata nel richiamo e non sostituisce le comunicazioni di AIFA e del Ministero della Salute.</li>
+    <li>Gli alert sono generati dall'AI e possono contenere errori: vanno verificati sulle fonti.</li>
+    <li>Il punteggio di rischio è una regola semplice (classe del richiamo e valutazione dell'AI), non un modello statistico validato.</li>
+    <li>Il grafo copre solo una parte del SSN: gli enti italiani di partenza sono un insieme limitato inserito a mano.</li>
+  </ul>
+</section>
+
+</main>
+
+<div class="cta">
+  <p>Gratuita e senza registrazione.</p>
+  <a href="https://healthint-frontend.onrender.com" class="btn btn-green" target="_blank" rel="noopener">Accedi alla piattaforma →</a>
+  &nbsp;
+  <a href="index.html#apps" class="btn btn-ghost">Tutte le piattaforme</a>
+</div>
+
+<footer>
+  © 2025 HealthHorizon · Made in Italy ·
+  <a href="index.html">Torna alla home</a> ·
+  <a href="mailto:info@healthhorizon.it">info@healthhorizon.it</a>
+</footer>
+
+</body>
+</html>
