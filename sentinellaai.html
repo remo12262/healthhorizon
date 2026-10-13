@@ -58,8 +58,8 @@
       <p>Fai domande in linguaggio naturale su focolai, virus e malattie infettive. L'AI riceve i dati ufficiali del cruscotto con la settimana di riferimento e cita solo quelli; se un dato non è disponibile (per esempio pronto soccorso, ricoveri o singole regioni) lo dice invece di inventarlo.</p>
     </div>
     <div class="feature">
-      <h3>Simulatore di scenario</h3>
-      <p>Imposti l'aumento dell'incidenza delle sindromi simil-influenzali, la durata in settimane, la copertura vaccinale e la fascia d'età. L'AI restituisce una stima qualitativa di casi, ricoveri, accessi in pronto soccorso e saturazione, con una raccomandazione.</p>
+      <h3>Simulatore di scenario (simulazione)</h3>
+      <p>Imposti l'aumento dell'incidenza delle infezioni respiratorie, la durata in settimane, la copertura vaccinale e la fascia d'età. L'AI restituisce una stima qualitativa di casi, ricoveri, accessi in pronto soccorso e saturazione, con una raccomandazione. Il pannello e il risultato sono etichettati «Simulazione»: non sono dati.</p>
     </div>
     <div class="feature">
       <h3>Report</h3>
@@ -67,7 +67,7 @@
     </div>
     <div class="feature">
       <h3>Cruscotto con dati ufficiali</h3>
-      <p>Andamento settimanale delle infezioni respiratorie acute in Italia e positività dei campioni a influenza, RSV e SARS-CoV-2 (dati RespiVirNet pubblicati dall'ECDC), con la settimana di riferimento, più le ultime notizie ECDC e i focolai segnalati dall'OMS.</p>
+      <p>Andamento settimanale delle infezioni respiratorie acute in Italia e positività dei campioni a influenza, RSV e SARS-CoV-2 (dati RespiVirNet pubblicati dall'ECDC), più le ultime notizie ECDC e i focolai segnalati dall'OMS. Ogni dato riporta fonte, link e data a cui si riferisce. Nessun valore è stimato o simulato.</p>
     </div>
   </div>
 </section>
@@ -87,19 +87,21 @@
   <table class="sources">
     <thead><tr><th>Contenuto</th><th>Fonte</th><th>Aggiornamento</th></tr></thead>
     <tbody>
-      <tr><td>Infezioni respiratorie in Italia (incidenza e positività)</td><td><a href="https://erviss.org" target="_blank" rel="noopener">ECDC – ERVISS</a>, che pubblica i dati della sorveglianza RespiVirNet italiana</td><td>Settimanale durante la stagione (dalla settimana 42 alla 17); scaricati al massimo ogni 6 ore</td></tr>
-      <tr><td>Minacce sanitarie e focolai</td><td>Notizie e bollettino settimanale delle minacce dell'<a href="https://www.ecdc.europa.eu" target="_blank" rel="noopener">ECDC</a>; Disease Outbreak News dell'<a href="https://www.who.int/emergencies/disease-outbreak-news" target="_blank" rel="noopener">OMS</a></td><td>Scaricati al massimo ogni 6 ore</td></tr>
+      <tr><td>Infezioni respiratorie in Italia (incidenza e positività)</td><td><a href="https://erviss.org" target="_blank" rel="noopener">ECDC – ERVISS</a>, che pubblica i dati della sorveglianza RespiVirNet italiana</td><td>Settimanale durante la stagione (dalla settimana 42 alla 17). Ultimo dato italiano: settimana 9 del 2026, per la sospensione dei flussi RespiVirNet comunicata dall'ISS il 9 marzo 2026</td></tr>
+      <tr><td>Minacce sanitarie e focolai</td><td>Notizie e bollettino settimanale delle minacce dell'<a href="https://www.ecdc.europa.eu" target="_blank" rel="noopener">ECDC</a>; Disease Outbreak News dell'<a href="https://www.who.int/emergencies/disease-outbreak-news" target="_blank" rel="noopener">OMS</a></td><td>Continuo</td></tr>
       <tr><td>Risposte, simulazioni e report</td><td>Modello AI Claude (Anthropic), a partire dai dati sopra</td><td>Generati al momento della richiesta</td></tr>
     </tbody>
   </table>
-  <p>Non sono disponibili come open data aggiornati gli accessi in pronto soccorso, i ricoveri e i dati per singola regione: SentinellaAI non li mostra. Per l'incidenza regionale si rimanda al bollettino RespiVirNet dell'ISS.</p>
+  <p>Le fonti vengono scaricate al massimo una volta al giorno, senza usare l'AI, e l'ultima copia viene conservata: se una fonte non risponde restano visibili gli ultimi dati con la loro data.</p>
+  <p>Non sono disponibili come dati aperti scaricabili gli accessi in pronto soccorso, i ricoveri, le prescrizioni e i dati per singola regione: SentinellaAI non li mostra. L'ISS pubblica l'incidenza regionale solo nei bollettini PDF di <a href="https://respivirnet.iss.it" target="_blank" rel="noopener">RespiVirNet</a>.</p>
+  <p>SentinellaAI non genera allerte automatiche: le soglie epidemiche ufficiali dell'ISS sono calcolate sulle sindromi simil-influenzali e, come indica l'ISS, non si applicano all'indicatore ARI in uso dalla stagione 2025/26.</p>
 </section>
 
 <section class="block">
   <h2>Limiti</h2>
   <div class="notice"><strong>Strumento di supporto alle decisioni.</strong> Le risposte dell'AI possono contenere errori o informazioni non aggiornate e vanno sempre verificate sulle fonti ufficiali.</div>
   <ul>
-    <li>Fuori stagione (da maggio a metà ottobre) l'ultimo dato di sorveglianza respiratoria disponibile resta quello di fine stagione, e il cruscotto lo segnala.</li>
+    <li>Quando non arrivano dati nuovi (fuori stagione o per la sospensione dei flussi regionali da marzo 2026) il cruscotto mostra l'ultimo dato ufficiale con la sua data e lo segnala.</li>
     <li>Il simulatore non è un modello epidemiologico validato: produce una proiezione ragionata dall'AI, utile per discutere, non per pianificare.</li>
     <li>Non sostituisce bollettini e comunicazioni ufficiali di ISS, ECDC e OMS.</li>
     <li>Per contenere i costi, le richieste all'AI sono limitate (10 all'ora per utente e un tetto giornaliero complessivo).</li>

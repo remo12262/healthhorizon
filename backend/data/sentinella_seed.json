@@ -1,0 +1,233 @@
+{
+ "errors": {},
+ "sources": {
+  "surveillance": {
+   "name": "ECDC – ERVISS, dati settimanali per paese (Italia: rete RespiVirNet)",
+   "url": "https://github.com/EU-ECDC/Respiratory_viruses_weekly_data",
+   "downloaded_at": "2026-10-13T17:02",
+   "data_date": "2026-03-01"
+  },
+  "ecdc": {
+   "name": "ECDC – notizie e Communicable Disease Threats Report",
+   "url": "https://www.ecdc.europa.eu/en/news-events",
+   "downloaded_at": "2026-10-13T17:02",
+   "data_date": "2026-10-12"
+  },
+  "who": {
+   "name": "OMS – Disease Outbreak News",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news",
+   "downloaded_at": "2026-10-13T17:02",
+   "data_date": "2026-10-10"
+  }
+ },
+ "attempted_at": "2026-10-13T17:02",
+ "surveillance": {
+  "indicator": "ari",
+  "latest_week": "2026-W09",
+  "weeks_since_latest": 33,
+  "series": [
+   {
+    "week": "2025-W46",
+    "ili": null,
+    "ari": 9.18,
+    "ili_prev": 7.38,
+    "ari_prev": null
+   },
+   {
+    "week": "2025-W47",
+    "ili": null,
+    "ari": 10.15,
+    "ili_prev": 8.01,
+    "ari_prev": null
+   },
+   {
+    "week": "2025-W48",
+    "ili": null,
+    "ari": 11.61,
+    "ili_prev": 8.52,
+    "ari_prev": null
+   },
+   {
+    "week": "2025-W49",
+    "ili": null,
+    "ari": 14.01,
+    "ili_prev": 9.03,
+    "ari_prev": null
+   },
+   {
+    "week": "2025-W50",
+    "ili": null,
+    "ari": 15.97,
+    "ili_prev": 10.17,
+    "ari_prev": null
+   },
+   {
+    "week": "2025-W51",
+    "ili": null,
+    "ari": 18.6,
+    "ili_prev": 10.72,
+    "ari_prev": null
+   },
+   {
+    "week": "2025-W52",
+    "ili": null,
+    "ari": 16.11,
+    "ili_prev": 10.51,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W01",
+    "ili": null,
+    "ari": 16.17,
+    "ili_prev": 12.35,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W02",
+    "ili": null,
+    "ari": 15.23,
+    "ili_prev": 14.94,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W03",
+    "ili": null,
+    "ari": 13.94,
+    "ili_prev": 16.02,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W04",
+    "ili": null,
+    "ari": 12.56,
+    "ili_prev": 17.35,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W05",
+    "ili": null,
+    "ari": 11.49,
+    "ili_prev": 16.8,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W06",
+    "ili": null,
+    "ari": 10.53,
+    "ili_prev": 15.23,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W07",
+    "ili": null,
+    "ari": 9.48,
+    "ili_prev": 14.21,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W08",
+    "ili": null,
+    "ari": 8.42,
+    "ili_prev": 13.09,
+    "ari_prev": null
+   },
+   {
+    "week": "2026-W09",
+    "ili": null,
+    "ari": 7.87,
+    "ili_prev": 11.36,
+    "ari_prev": null
+   }
+  ],
+  "positivity": {
+   "influenza": 1.5,
+   "rsv": 16.7,
+   "sars_cov_2": 1.3
+  },
+  "positivity_week": "2026-W09",
+  "unit": "casi per 1.000 assistiti a settimana"
+ },
+ "ecdc": {
+  "news": [
+   {
+    "title": "Ebola disease outbreak in the Democratic Republic of the Congo",
+    "url": "https://www.ecdc.europa.eu/en/ebola-outbreak-democratic-republic-congo-and-uganda",
+    "date": "2026-10-12"
+   },
+   {
+    "title": "ECDC closely monitoring situation following case of pneumonia of unknown origin in Russia",
+    "url": "https://www.ecdc.europa.eu/en/news-events/ecdc-closely-monitoring-situation-following-case-pneumonia-unknown-origin-russia",
+    "date": "2026-10-06"
+   },
+   {
+    "title": "Chikungunya virus disease worldwide overview",
+    "url": "https://www.ecdc.europa.eu/en/chikungunya-monthly",
+    "date": "2026-10-05"
+   },
+   {
+    "title": "EU-led assessment to Albania will strengthen cross-sector response to antimicrobial resistance",
+    "url": "https://www.ecdc.europa.eu/en/news-events/eu-led-assessment-albania-will-strengthen-cross-sector-response-antimicrobial",
+    "date": "2026-10-05"
+   },
+   {
+    "title": "Risk to general population remains very low following fourth imported Ebola case in Europe",
+    "url": "https://www.ecdc.europa.eu/en/news-events/risk-general-population-remains-very-low-following-fourth-imported-ebola-case-europe",
+    "date": "2026-10-01"
+   },
+   {
+    "title": "New hepatitis surveillance report shows strengthened public health cooperation with EU candidate countries",
+    "url": "https://www.ecdc.europa.eu/en/news-events/new-hepatitis-surveillance-report-shows-strengthened-public-health-cooperation-eu",
+    "date": "2026-10-01"
+   }
+  ],
+  "threats_reports": [
+   {
+    "title": "Communicable disease threats report, 3 - 9 October, week 41",
+    "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-3-9-october-week-41",
+    "date": "2026-10-09"
+   },
+   {
+    "title": "Communicable disease threats report, 26 September - 2 October, week 40",
+    "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-26-september-2-october-week-40",
+    "date": "2026-10-02"
+   },
+   {
+    "title": "Communicable disease threats report, 19-25 September, week 39",
+    "url": "https://www.ecdc.europa.eu/en/publications-data/communicable-disease-threats-report-19-25-september-week-39",
+    "date": "2026-09-25"
+   }
+  ]
+ },
+ "who": [
+  {
+   "title": "Pneumonia of undetermined etiology - the Russian Federation",
+   "date": "2026-10-10",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON620"
+  },
+  {
+   "title": "Ebola disease caused by Bundibugyo virus - Democratic Republic of the Congo",
+   "date": "2026-10-08",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON619"
+  },
+  {
+   "title": "Ebola disease caused by Bundibugyo virus - Democratic Republic of the Congo",
+   "date": "2026-09-25",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON618"
+  },
+  {
+   "title": "Ebola disease caused by Bundibugyo virus - Democratic Republic of the Congo",
+   "date": "2026-09-10",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON617"
+  },
+  {
+   "title": "Ebola disease caused by Bundibugyo virus - Democratic Republic of the Congo",
+   "date": "2026-08-28",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON616"
+  },
+  {
+   "title": "Ebola disease caused by Bundibugyo virus - Democratic Republic of the Congo",
+   "date": "2026-08-14",
+   "url": "https://www.who.int/emergencies/disease-outbreak-news/item/2026-DON615"
+  }
+ ]
+}

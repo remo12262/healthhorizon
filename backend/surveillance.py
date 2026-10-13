@@ -5,14 +5,19 @@ Fonti:
   https://github.com/EU-ECDC/Respiratory_viruses_weekly_data
 - ECDC, notizie e Communicable Disease Threats Report (RSS)
 - OMS, Disease Outbreak News (API pubblica)
-Le fonti si riscaricano al massimo ogni CACHE_SECONDI; se una non risponde restano
-i dati precedenti e l'errore viene registrato.
+Le fonti si riscaricano al massimo una volta al giorno (INTERVALLO_SECONDI) e l'ultima
+copia viene salvata su file (CACHE_FILE). Se una fonte non risponde restano i dati
+precedenti con la loro data. Dopo un riavvio si riparte dal file salvato o, se manca,
+dalla copia di riserva nel repository (SEED_FILE). Nessuna chiamata all'AI.
 """
+import asyncio
 import csv
 import io
+import json
+import os
 import re
-import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+from pathlib import Path
 
 import httpx
 
@@ -21,15 +26,39 @@ ECDC_NEWS = "https://www.ecdc.europa.eu/en/taxonomy/term/1307/feed"
 ECDC_CDTR = "https://www.ecdc.europa.eu/en/taxonomy/term/1505/feed"
 WHO_DON = "https://www.who.int/api/news/diseaseoutbreaknews"
 WHO_DON_PAGE = "https://www.who.int/emergencies/disease-outbreak-news/item/"
-CACHE_SECONDI = 6 * 3600
+INTERVALLO_SECONDI = 24 * 3600
 UA = {"User-Agent": "Mozilla/5.0 SentinellaAI/1.0 (+https://healthhorizon.it)"}
 
-_cache = {"data": None, "fetched": 0.0}
+DATA_DIR = Path(__file__).parent / "data"
+SEED_FILE = DATA_DIR / "sentinella_seed.json"
+CACHE_FILE = Path(os.environ.get("SENTINELLA_CACHE_FILE", DATA_DIR / "sentinella_cache.json"))
+
+# Descrizione delle fonti mostrata nel cruscotto (nome e link pubblico)
+SOURCES = {
+    "surveillance": {"name": "ECDC – ERVISS, dati settimanali per paese (Italia: rete RespiVirNet)",
+                     "url": "https://github.com/EU-ECDC/Respiratory_viruses_weekly_data"},
+    "ecdc": {"name": "ECDC – notizie e Communicable Disease Threats Report",
+             "url": "https://www.ecdc.europa.eu/en/news-events"},
+    "who": {"name": "OMS – Disease Outbreak News",
+            "url": "https://www.who.int/emergencies/disease-outbreak-news"},
+}
+
+_cache = {"data": None}
+_lock = asyncio.Lock()
 
 
 def _week_key(yw: str):
     m = re.match(r"(\d{4})-W(\d{2})", yw)
     return (int(m.group(1)), int(m.group(2))) if m else (0, 0)
+
+
+def week_end(yw: str):
+    """Domenica che chiude la settimana ISO, in formato AAAA-MM-GG."""
+    y, w = _week_key(yw)
+    try:
+        return (date.fromisocalendar(y, w, 1) + timedelta(days=6)).isoformat()
+    except ValueError:
+        return None
 
 
 def _weeks_ago(yw: str) -> int:
@@ -98,8 +127,6 @@ async def _erviss(client):
         "positivity": positivity,
         "positivity_week": latest_pos,
         "unit": "casi per 1.000 assistiti a settimana",
-        "source": "ECDC – European Respiratory Virus Surveillance Summary (ERVISS), dati RespiVirNet per l'Italia",
-        "source_url": "https://erviss.org",
     }
 
 
@@ -141,22 +168,76 @@ async def _who(client):
              "url": WHO_DON_PAGE + x.get("UrlName", "")} for x in r.json().get("value", [])]
 
 
-async def dashboard(force: bool = False) -> dict:
-    """Dati del cruscotto; ogni fonte che fallisce mantiene il valore precedente."""
-    if not force and _cache["data"] and time.time() - _cache["fetched"] < CACHE_SECONDI:
-        return _cache["data"]
-    prev = _cache["data"] or {}
-    data = {"errors": {}}
+def _data_date(key, payload):
+    """Data a cui si riferisce il dato (non quella dello scarico)."""
+    if not payload:
+        return None
+    if key == "surveillance":
+        return week_end(payload["latest_week"])
+    items = (payload.get("news", []) + payload.get("threats_reports", [])) if key == "ecdc" else payload
+    dates = [n["date"] for n in items if n.get("date")]
+    return max(dates) if dates else None
+
+
+def _load_saved():
+    """Ultima copia salvata: il file di cache se c'è, altrimenti la copia nel repository."""
+    for f in (CACHE_FILE, SEED_FILE):
+        try:
+            return json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+    return None
+
+
+def _save(data):
+    try:
+        CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        tmp = CACHE_FILE.with_suffix(".tmp")
+        tmp.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+        tmp.replace(CACHE_FILE)
+    except OSError as e:
+        print(f"[dati] copia non salvata: {e}")
+
+
+async def download(prev: dict | None = None) -> dict:
+    """Scarica tutte le fonti; quelle che non rispondono mantengono i dati e le date precedenti."""
+    prev = prev or {}
+    now = datetime.utcnow().isoformat(timespec="minutes")
+    data = {"errors": {}, "sources": {}, "attempted_at": now}
     async with httpx.AsyncClient(timeout=60, follow_redirects=True) as client:
         for key, fn in (("surveillance", _erviss), ("ecdc", _ecdc), ("who", _who)):
             try:
                 data[key] = await fn(client)
+                downloaded = now
             except Exception as e:
                 data["errors"][key] = f"{type(e).__name__}: {e}"[:200]
                 data[key] = prev.get(key)
+                downloaded = (prev.get("sources") or {}).get(key, {}).get("downloaded_at")
                 print(f"[dati] ERRORE {key}: {data['errors'][key]}")
-    data["fetched_at"] = datetime.utcnow().isoformat(timespec="minutes")
-    _cache.update(data=data, fetched=time.time())
+            data["sources"][key] = {**SOURCES[key], "downloaded_at": downloaded,
+                                    "data_date": _data_date(key, data[key])}
+    return data
+
+
+def _age_seconds(data) -> float:
+    try:
+        return (datetime.utcnow() - datetime.fromisoformat(data["attempted_at"])).total_seconds()
+    except (KeyError, TypeError, ValueError):
+        return float("inf")
+
+
+async def dashboard() -> dict:
+    """Dati del cruscotto: riscaricati al massimo una volta al giorno, sempre con fonte e data."""
+    if _cache["data"] is None:
+        _cache["data"] = _load_saved()
+    if _cache["data"] and _age_seconds(_cache["data"]) < INTERVALLO_SECONDI:
+        return _cache["data"]
+    async with _lock:
+        if _cache["data"] and _age_seconds(_cache["data"]) < INTERVALLO_SECONDI:
+            return _cache["data"]
+        data = await download(_cache["data"])
+        _cache["data"] = data
+        _save(data)
     return data
 
 
@@ -164,7 +245,7 @@ def context_for_ai(d: dict) -> str:
     """Riassunto dei dati reali da passare all'AI, con le date di riferimento."""
     if not d:
         return ""
-    lines = [f"DATI REALI DISPONIBILI (scaricati il {d.get('fetched_at')} UTC):"]
+    lines = [f"DATI REALI DISPONIBILI (ultimo controllo delle fonti il {d.get('attempted_at')} UTC):"]
     s = d.get("surveillance")
     if s:
         last = s["series"][-1]
@@ -179,7 +260,9 @@ def context_for_ai(d: dict) -> str:
             lines.append(f"- Positività dei campioni sentinella nella settimana {s['positivity_week']}: "
                          f"influenza {p.get('influenza')}%, RSV {p.get('rsv')}%, SARS-CoV-2 {p.get('sars_cov_2')}%.")
         if s["weeks_since_latest"] > 3:
-            lines.append("- Il dato non è recente: la sorveglianza respiratoria italiana è stagionale (settimane 42-17).")
+            lines.append("- Il dato non è recente: il 9 marzo 2026 l'ISS ha comunicato che le Regioni hanno sospeso i flussi "
+                         "di dati della sorveglianza RespiVirNet; da allora non ci sono nuovi dati italiani. "
+                         "Non esistono soglie epidemiche ufficiali valide per l'indicatore ARI.")
     for n in (d.get("ecdc") or {}).get("news", [])[:5]:
         lines.append(f"- Notizia ECDC del {n['date']}: {n['title']} ({n['url']})")
     for n in (d.get("who") or [])[:4]:

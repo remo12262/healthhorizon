@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 ai_costs.json
+backend/data/sentinella_cache.json
+backend/data/*.tmp
