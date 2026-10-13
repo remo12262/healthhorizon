@@ -5,14 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HealthHorizon — AI per la Sanità Digitale Italiana</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LL6B74T4F"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9LL6B74T4F');
-</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -175,8 +167,9 @@ gap:20px;
 @media(max-width:640px){
 .apps-grid{grid-template-columns:1fr;}
 .hero h1{font-size:28px;}
-nav{padding:0 1rem;}
-.nav-links{display:none;}
+nav{padding:8px 1rem;height:auto;flex-wrap:wrap;gap:6px;}
+.nav-links{width:100%;display:flex;flex-wrap:wrap;gap:6px 16px;padding-bottom:4px;}
+.nav-links a{margin-left:0;white-space:nowrap;}
 }
 
 .card{
@@ -417,8 +410,9 @@ footer a:hover{text-decoration:underline;}
     <div class="nav-name">HealthHorizon</div>
   </div>
   <div class="nav-links">
-    <a href="#come-funziona">Come funziona</a>
     <a href="#apps">Piattaforme</a>
+    <a href="prova.html">Prova in 3 minuti</a>
+    <a href="come-funziona.html">Come funziona e limiti</a>
     <a href="#visione">Visione</a>
   </div>
 </nav>
@@ -431,7 +425,7 @@ footer a:hover{text-decoration:underline;}
     Dalla sorveglianza epidemiologica alla gestione PNRR.
   </p>
   <a href="#apps" class="btn btn-green">Scopri le piattaforme</a>&nbsp;&nbsp;
-  <a href="#visione" class="btn btn-ghost">La visione</a>
+  <a href="prova.html" class="btn btn-ghost">Prova in 3 minuti</a>
 
   <div class="hero-stats">
     <div><div class="stat-n">4</div><div class="stat-l">Piattaforme attive</div></div>
@@ -532,6 +526,21 @@ footer a:hover{text-decoration:underline;}
       </div>
     </div>
 
+    <div class="card">
+      <span class="card-tag">Benessere personale · App Android</span>
+      <h3>Ritmo <span class="coming-soon">In arrivo</span></h3>
+      <p>App per smartphone con brevi test funzionali (vigilanza, velocità motoria, memoria di lavoro, flessibilità mentale) e un questionario sul benessere, per confrontare i propri risultati con la propria linea di base nel tempo.</p>
+      <div class="card-for"><strong>Per chi:</strong> chiunque voglia seguire nel tempo il proprio benessere.</div>
+      <ul>
+        <li>Non è un dispositivo medico e non fa diagnosi.</li>
+        <li>Funziona senza Internet: i risultati restano solo sul telefono.</li>
+        <li>In preparazione per Google Play: non ancora disponibile al download.</li>
+      </ul>
+      <div class="card-actions">
+        <a href="ritmo/privacy/" class="card-link-ghost">Informativa privacy dell'app</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -570,7 +579,11 @@ footer a:hover{text-decoration:underline;}
 </div>
 
 <footer>
-  © 2025 HealthHorizon · Made in Italy ·
+  © 2026 HealthHorizon · progetto di Remo Pulcini, innovatore indipendente ·
+  <a href="index.html">Home</a> ·
+  <a href="prova.html">Prova in 3 minuti</a> ·
+  <a href="come-funziona.html">Come funziona e limiti</a> ·
+  <a href="privacy.html">Privacy</a> ·
   <a href="mailto:info@healthhorizon.it">info@healthhorizon.it</a>
 </footer>
 

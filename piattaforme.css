@@ -215,7 +215,34 @@ footer a{color:var(--green2);text-decoration:none;}
 footer a:hover{text-decoration:underline;}
 
 @media(max-width:640px){
-nav{padding:0 1rem;}
-.nav-links{display:none;}
+nav{padding:8px 1rem;height:auto;flex-wrap:wrap;gap:6px;}
+.nav-links{width:100%;display:flex;flex-wrap:wrap;gap:6px 16px;padding-bottom:4px;}
+.nav-links a{margin-left:0;white-space:nowrap;}
 .page-hero h1{font-size:28px;}
 }
+
+.nav-links a[aria-current="page"]{color:var(--green2);font-weight:500;}
+
+/* Pagina "Prova in 3 minuti" */
+.try-list{display:grid;gap:18px;}
+.try{
+background:#fff;
+border:1px solid var(--border);
+border-radius:6px;
+padding:22px;
+}
+.try-head h2{font-family:'Playfair Display',serif;font-size:22px;margin:8px 0 10px;}
+.try-q{
+font-size:16px;
+font-weight:500;
+background:var(--cream);
+border-left:4px solid var(--green2);
+padding:12px 14px;
+border-radius:4px;
+margin-bottom:10px;
+}
+.try-how,.try-expect{font-size:14px;color:var(--mid);margin-bottom:8px;}
+.try-expect strong,.try-how strong{color:var(--ink);}
+.try-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+.try-actions .btn{cursor:pointer;}
+.try-note{font-size:13px;color:var(--mid);margin-top:16px;}

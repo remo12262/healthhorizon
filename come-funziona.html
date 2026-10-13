@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Come funziona e limiti | HealthHorizon</title>
+<meta name="description" content="Come funzionano le piattaforme HealthHorizon: fonti dei dati, modelli di intelligenza artificiale, cosa è dato reale e cosa è generato dall'IA, limiti noti e principi di trasparenza.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="piattaforme.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-cross">+</div>
+    <div class="nav-name">HealthHorizon</div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#apps">Piattaforme</a>
+    <a href="prova.html">Prova in 3 minuti</a>
+    <a href="come-funziona.html" aria-current="page">Come funziona e limiti</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <span class="tag">Trasparenza</span>
+  <h1>Come funziona e limiti</h1>
+  <p class="lead">Per ogni piattaforma: cosa fa, da dove prende i dati, quale modello di intelligenza artificiale usa, cosa è dato reale e cosa è generato dall'IA, e i limiti che conosciamo.</p>
+</header>
+
+<main>
+
+<section class="block">
+  <h2>Principi</h2>
+  <ul>
+    <li><strong>L'IA supporta, la persona decide.</strong> Risposte, sintesi, alert e scenari sono un aiuto alla lettura e alla prima stesura: le decisioni restano a chi le prende, con le proprie competenze e responsabilità.</li>
+    <li><strong>I contenuti generati vanno verificati.</strong> Ogni piattaforma indica le fonti da controllare: bollettini e dati ufficiali, testi dei contratti e delle norme, bandi.</li>
+    <li><strong>Nessun dato personale o clinico di pazienti.</strong> Le piattaforme usano solo dati pubblici e non sono collegate a sistemi sanitari (fascicolo sanitario, CUP, cartelle cliniche). Non inserire nelle domande dati che permettano di identificare pazienti o altre persone.</li>
+    <li><strong>Trasparenza sull'uso dell'IA.</strong> In linea con gli obblighi di trasparenza dell'art. 50 del Regolamento (UE) 2024/1689 sull'intelligenza artificiale (AI Act), ogni piattaforma dichiara quando si sta interagendo con un sistema di IA, distingue i contenuti generati dall'IA dai dati provenienti dalle fonti e indica con un'etichetta «Simulazione» gli elementi simulati.</li>
+    <li><strong>Accesso libero e costi sotto controllo.</strong> Non serve registrarsi. Le richieste all'IA hanno un limite orario per utente e un tetto giornaliero complessivo; a parte l'aggiornamento di HEALTHINT descritto sotto, l'IA lavora solo quando qualcuno fa una domanda.</li>
+  </ul>
+</section>
+
+<section class="block" id="sentinellaai">
+  <h2>SentinellaAI</h2>
+  <table class="sources">
+    <tbody>
+      <tr><td>Cosa fa</td><td>Cruscotto sulle infezioni respiratorie in Italia e sulle minacce sanitarie segnalate da ECDC e OMS, con un assistente IA che risponde a domande, prepara bozze di report e un simulatore di scenario.</td></tr>
+      <tr><td>Fonti dei dati</td><td><a href="https://github.com/EU-ECDC/Respiratory_viruses_weekly_data" target="_blank" rel="noopener">ECDC – ERVISS</a> (dati della rete RespiVirNet per l'Italia); notizie e bollettino settimanale delle minacce dell'<a href="https://www.ecdc.europa.eu" target="_blank" rel="noopener">ECDC</a>; <a href="https://www.who.int/emergencies/disease-outbreak-news" target="_blank" rel="noopener">OMS – Disease Outbreak News</a>. Scaricate al massimo una volta al giorno, senza IA.</td></tr>
+      <tr><td>Modello IA</td><td>Claude Haiku 4.5 (Anthropic), usato solo quando l'utente fa una domanda, chiede un report o avvia il simulatore.</td></tr>
+      <tr><td>Dato reale</td><td>Valori, grafico e notizie del cruscotto, ciascuno con fonte, link e data a cui si riferisce.</td></tr>
+      <tr><td>Generato dall'IA o simulato</td><td>Risposte e report dell'assistente. Il simulatore è etichettato «Simulazione»: parametri ipotetici scelti dall'utente e proiezione qualitativa scritta dall'IA.</td></tr>
+      <tr><td>Limiti noti</td><td>Dal 9 marzo 2026 l'ISS ha comunicato la sospensione dei flussi regionali della sorveglianza RespiVirNet: l'ultimo dato italiano disponibile è della settimana 9 del 2026 e il cruscotto lo segnala. Non sono mostrati dati regionali, accessi in pronto soccorso o ricoveri, perché non esistono come dati aperti scaricabili. Non ci sono allerte automatiche: le soglie epidemiche dell'ISS non si applicano all'indicatore ARI. Il simulatore non è un modello epidemiologico validato.</td></tr>
+    </tbody>
+  </table>
+  <p><a href="sentinellaai.html">Scheda completa di SentinellaAI →</a></p>
+</section>
+
+<section class="block" id="healthint">
+  <h2>HEALTHINT</h2>
+  <table class="sources">
+    <tbody>
+      <tr><td>Cosa fa</td><td>Grafo di enti, aziende ed eventi sanitari con le loro relazioni, richiami di farmaci e dispositivi medici, focolai segnalati dall'OMS, alert e classifica di rischio.</td></tr>
+      <tr><td>Fonti dei dati</td><td><a href="https://open.fda.gov/apis/drug/enforcement/" target="_blank" rel="noopener">openFDA</a> (richiami di farmaci e dispositivi con distribuzione in Italia); <a href="https://www.who.int/emergencies/disease-outbreak-news" target="_blank" rel="noopener">OMS – Disease Outbreak News</a>; un gruppo di enti e relazioni di base inseriti manualmente. Aggiornamento automatico due volte al giorno.</td></tr>
+      <tr><td>Modello IA</td><td>Claude Haiku 4.5 (Anthropic), senza ricerca sul web: estrae entità e relazioni dalle notizie OMS e scrive gli alert. È l'unico caso in cui l'IA lavora in automatico (nei due aggiornamenti giornalieri); il pulsante «Aggiorna dati» è disponibile al massimo una volta all'ora.</td></tr>
+      <tr><td>Dato reale</td><td>Richiami FDA e notizie OMS, con link e data. Il rischio delle aziende con richiami è calcolato con una formula fissa (classe del richiamo e recenza), senza IA.</td></tr>
+      <tr><td>Generato dall'IA</td><td>Entità e relazioni ricavate dalle notizie OMS (con il link alla notizia d'origine), il loro punteggio di rischio e gli alert, che sono ipotesi da verificare, non previsioni validate.</td></tr>
+      <tr><td>Limiti noti</td><td>openFDA è una fonte statunitense: i richiami indicano una distribuzione in Italia ma non sono provvedimenti di AIFA o del Ministero della Salute. Gli enti e le relazioni di base inseriti a mano sono indicati come «Fonte da verificare»; la legenda dell'app mostra quanti elementi del grafo hanno una fonte con link.</td></tr>
+    </tbody>
+  </table>
+  <p><a href="healthint.html">Scheda completa di HEALTHINT →</a></p>
+</section>
+
+<section class="block" id="pnrr">
+  <h2>PNRR Sanità Intelligence</h2>
+  <table class="sources">
+    <tbody>
+      <tr><td>Cosa fa</td><td>Quadro delle misure della Missione 6 Salute (Tracker M6), calcolatore delle misure potenzialmente adatte al proprio ente e assistente IA su rendicontazione, milestone e documentazione.</td></tr>
+      <tr><td>Fonti dei dati</td><td>Valori indicativi inseriti manualmente nella pagina, con riferimento a <a href="https://www.italiadomani.gov.it" target="_blank" rel="noopener">Italia Domani</a> e al Ministero della Salute. Non aggiornati in automatico; la piattaforma non è collegata a ReGiS.</td></tr>
+      <tr><td>Modello IA</td><td>Claude Opus 4.5 (Anthropic) nella configurazione predefinita, usato solo quando l'utente chiede un'analisi.</td></tr>
+      <tr><td>Dato reale</td><td>Nessun dato in tempo reale: tracker e tabella per regione sono valori indicativi. Il calcolatore applica regole fisse, senza IA.</td></tr>
+      <tr><td>Generato dall'IA</td><td>Checklist, analisi e risposte dell'assistente, basate sulle conoscenze generali del modello e su ciò che l'utente scrive.</td></tr>
+      <tr><td>Limiti noti</td><td>I numeri possono non riflettere le revisioni del PNRR né lo stato attuale dei progetti. L'assistente non legge il contenuto dei file caricati, solo il loro nome. Le indicazioni non sostituiscono la consulenza legale o amministrativa né le istruzioni dell'amministrazione titolare.</td></tr>
+    </tbody>
+  </table>
+  <p><a href="pnrr-intelligence.html">Scheda completa di PNRR Sanità Intelligence →</a></p>
+</section>
+
+<section class="block" id="sanitapro">
+  <h2>SanitàPro</h2>
+  <table class="sources">
+    <tbody>
+      <tr><td>Cosa fa</td><td>Assistente IA per chi lavora nel SSN su CCNL, normativa del personale e concorsi, più l'elenco dei concorsi in sanità pubblicati di recente.</td></tr>
+      <tr><td>Fonti dei dati</td><td>Concorsi da <a href="https://www.inpa.gov.it" target="_blank" rel="noopener">inPA</a>, <a href="https://www.gazzettaufficiale.it" target="_blank" rel="noopener">Gazzetta Ufficiale</a> (4ª serie speciale) e ticonsiglio.com, aggiornati al massimo ogni 6 ore, senza IA. Le risposte dell'assistente si basano sulle conoscenze del modello: non consulta in tempo reale i testi dei contratti.</td></tr>
+      <tr><td>Modello IA</td><td>Claude Haiku 4.5 (Anthropic), usato solo quando l'utente fa una domanda.</td></tr>
+      <tr><td>Dato reale</td><td>Elenco dei concorsi con link al bando e scadenza quando disponibile.</td></tr>
+      <tr><td>Generato dall'IA</td><td>Le risposte. Sotto ognuna compaiono l'avviso «Risposta generata con IA: verifica sempre sul testo ufficiale del CCNL o del bando» e l'elenco di norme e articoli citati, da controllare.</td></tr>
+      <tr><td>Limiti noti</td><td>Il modello può citare un articolo o una versione del contratto sbagliati: va sempre verificato sul testo ufficiale. Non è consulenza legale o sindacale. L'elenco dei concorsi non è completo: comprende solo quelli presenti nelle fonti indicate.</td></tr>
+    </tbody>
+  </table>
+  <p><a href="sanitapro.html">Scheda completa di SanitàPro →</a></p>
+</section>
+
+<section class="block" id="limiti-uso">
+  <h2>Limiti di utilizzo dell'IA</h2>
+  <ul>
+    <li>Ogni piattaforma accetta al massimo 10 richieste all'IA all'ora dallo stesso indirizzo IP e ha un tetto giornaliero complessivo; SentinellaAI e PNRR Sanità Intelligence condividono lo stesso servizio e lo stesso tetto.</li>
+    <li>Quando un limite è raggiunto, la piattaforma lo dice con un messaggio e dati e grafici restano consultabili.</li>
+  </ul>
+</section>
+
+</main>
+
+<div class="cta">
+  <p>Vuoi vedere le piattaforme all'opera?</p>
+  <a href="prova.html" class="btn btn-green">Prova in 3 minuti →</a>
+  &nbsp;
+  <a href="index.html#apps" class="btn btn-ghost">Tutte le piattaforme</a>
+</div>
+
+<footer>
+  © 2026 HealthHorizon · progetto di Remo Pulcini, innovatore indipendente ·
+  <a href="index.html">Home</a> ·
+  <a href="prova.html">Prova in 3 minuti</a> ·
+  <a href="come-funziona.html">Come funziona e limiti</a> ·
+  <a href="privacy.html">Privacy</a> ·
+  <a href="mailto:info@healthhorizon.it">info@healthhorizon.it</a>
+</footer>
+
+</body>
+</html>
