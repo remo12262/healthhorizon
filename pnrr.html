@@ -94,6 +94,50 @@ nav {
   font-weight: 500;
 }
 
+/* ── BARRA DEL PORTALE HEALTHHORIZON ── */
+.hh-bar {
+  background: #2d2a24;
+  padding: 6px 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.hh-bar a { color: rgba(250,250,247,0.7); text-decoration: none; }
+.hh-bar a:hover { color: var(--white); }
+
+/* Nota al posto della tabella delle regioni */
+.regioni-nota {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid #C8A84B;
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+/* Piè di pagina comune del portale */
+.hh-footer {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink3);
+  border-top: 1px solid var(--border);
+  line-height: 1.8;
+}
+.hh-footer a { color: var(--blue); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .hh-bar { padding: 6px 1rem; }
+  nav { height: auto; flex-wrap: wrap; gap: 6px; padding: 8px 1rem; }
+  .nav-tabs { flex-wrap: wrap; }
+  .nav-tab { padding: 6px 10px; }
+}
+
 /* ── HERO ── */
 .hero {
   background: var(--ink);
@@ -807,6 +851,13 @@ nav {
 </head>
 <body>
 
+<div class="hh-bar">
+  <a href="index.html">← HealthHorizon</a>
+  <a href="prova.html">Prova in 3 minuti</a>
+  <a href="come-funziona.html">Come funziona e limiti</a>
+  <a href="privacy.html">Privacy</a>
+</div>
+
 <nav>
   <div class="nav-logo">Health<span>Horizon</span></div>
   <div class="nav-tabs">
@@ -843,32 +894,7 @@ nav {
   <!-- populated by JS -->
 </div>
 
-<div class="regioni-section">
-  <div class="regioni-header">
-    <div class="section-title" style="font-size:20px;margin-bottom:0">Avanzamento per regione</div>
-    <div class="filter-tabs">
-      <button class="filter-tab active" onclick="filterRegioni('tutti',this)">Tutti</button>
-      <button class="filter-tab" onclick="filterRegioni('avanzato',this)">In anticipo</button>
-      <button class="filter-tab" onclick="filterRegioni('rischio',this)">A rischio</button>
-    </div>
-  </div>
-
-  <div style="overflow-x:auto;margin-top:1rem">
-  <table class="regioni-table" id="regioni-table">
-    <thead>
-      <tr>
-        <th>Regione</th>
-        <th>Case Comunità</th>
-        <th>Ospedali Comunità</th>
-        <th>Fondi assegnati</th>
-        <th>Avanzamento</th>
-        <th>Stato</th>
-      </tr>
-    </thead>
-    <tbody id="regioni-body"></tbody>
-  </table>
-  </div>
-</div>
+<div class="regioni-nota">Monitoraggio regionale in sviluppo: sarà collegato ai dati ufficiali del PNRR.</div>
 </div>
 </div>
 
@@ -1047,70 +1073,21 @@ const API_BASE = 'https://healthhorizon-lw08.onrender.com';
    DATI STATICI MISSIONE 6
 ══════════════════════════════ */
 const MISURE = [
-  {
-    icon: '🏠', nome: 'Case della Comunità',
-    importo: '€2,0 Mld', target: 1350, realizzati: 812,
-    desc: 'Strutture di prossimità per cure primarie e medicina territoriale.',
-    stato: 'corso', fill: 'fill-blue', pct: 60,
-    scadenza: 'Dic 2026'
-  },
-  {
-    icon: '🏥', nome: 'Ospedali di Comunità',
-    importo: '€1,0 Mld', target: 400, realizzati: 198,
-    desc: 'Strutture intermedie per ricoveri brevi a bassa intensità clinica.',
-    stato: 'corso', fill: 'fill-blue', pct: 50,
-    scadenza: 'Dic 2026'
-  },
-  {
-    icon: '📡', nome: 'Centrali Operative Territoriali',
-    importo: '€0,3 Mld', target: 600, realizzati: 480,
-    desc: 'Nodi di coordinamento tra territorio, 118 e reti di emergenza.',
-    stato: 'avanzato', fill: 'fill-green', pct: 80,
-    scadenza: 'Giu 2026'
-  },
-  {
-    icon: '💻', nome: 'Telemedicina',
-    importo: '€1,0 Mld', target: 823, realizzati: 310,
-    desc: 'Piattaforme per teleconsulto, telemonitoraggio e teleassistenza.',
-    stato: 'rischio', fill: 'fill-red', pct: 38,
-    scadenza: 'Set 2025'
-  },
-  {
-    icon: '🔬', nome: 'Ammodernamento tecnologico',
-    importo: '€4,05 Mld', target: 3133, realizzati: 2100,
-    desc: 'TAC, risonanze, acceleratori lineari e grandi apparecchiature.',
-    stato: 'avanzato', fill: 'fill-green', pct: 67,
-    scadenza: 'Mar 2026'
-  },
-  {
-    icon: '🗂️', nome: 'Fascicolo Sanitario Elettronico',
-    importo: '€1,38 Mld', target: 21, realizzati: 14,
-    desc: 'Adeguamento FSE 2.0 in tutte le regioni italiane.',
-    stato: 'corso', fill: 'fill-blue', pct: 67,
-    scadenza: 'Dic 2025'
-  }
+  { icon: '🏠', nome: 'Case della Comunità', importo: '€2,0 Mld',
+    desc: 'Strutture di prossimità per cure primarie e medicina territoriale.', scadenza: 'Dic 2026' },
+  { icon: '🏥', nome: 'Ospedali di Comunità', importo: '€1,0 Mld',
+    desc: 'Strutture intermedie per ricoveri brevi a bassa intensità clinica.', scadenza: 'Dic 2026' },
+  { icon: '📡', nome: 'Centrali Operative Territoriali', importo: '€0,3 Mld',
+    desc: 'Nodi di coordinamento tra territorio, 118 e reti di emergenza.', scadenza: 'Giu 2026' },
+  { icon: '💻', nome: 'Telemedicina', importo: '€1,0 Mld',
+    desc: 'Piattaforme per teleconsulto, telemonitoraggio e teleassistenza.', scadenza: 'Set 2025' },
+  { icon: '🔬', nome: 'Ammodernamento tecnologico', importo: '€4,05 Mld',
+    desc: 'TAC, risonanze, acceleratori lineari e grandi apparecchiature.', scadenza: 'Mar 2026' },
+  { icon: '🗂️', nome: 'Fascicolo Sanitario Elettronico', importo: '€1,38 Mld',
+    desc: 'Adeguamento FSE 2.0 in tutte le regioni italiane.', scadenza: 'Dic 2025' }
 ];
 
-const REGIONI_DATA = [
-  { nome: 'Lombardia', cc: 209, oc: 60, fondi: '€1,85 Mld', pct: 72, stato: 'avanzato' },
-  { nome: 'Lazio', cc: 141, oc: 37, fondi: '€1,12 Mld', pct: 58, stato: 'corso' },
-  { nome: 'Campania', cc: 132, oc: 34, fondi: '€1,08 Mld', pct: 41, stato: 'rischio' },
-  { nome: 'Veneto', cc: 95, oc: 26, fondi: '€0,89 Mld', pct: 65, stato: 'corso' },
-  { nome: 'Piemonte', cc: 88, oc: 24, fondi: '€0,83 Mld', pct: 60, stato: 'corso' },
-  { nome: 'Emilia-Romagna', cc: 91, oc: 25, fondi: '€0,85 Mld', pct: 74, stato: 'avanzato' },
-  { nome: 'Toscana', cc: 76, oc: 20, fondi: '€0,71 Mld', pct: 69, stato: 'avanzato' },
-  { nome: 'Sicilia', cc: 109, oc: 29, fondi: '€0,88 Mld', pct: 34, stato: 'rischio' },
-  { nome: 'Puglia', cc: 97, oc: 26, fondi: '€0,80 Mld', pct: 45, stato: 'corso' },
-  { nome: 'Calabria', cc: 62, oc: 17, fondi: '€0,52 Mld', pct: 28, stato: 'rischio' },
-  { nome: 'Liguria', cc: 42, oc: 11, fondi: '€0,38 Mld', pct: 55, stato: 'corso' },
-  { nome: 'Marche', cc: 38, oc: 10, fondi: '€0,34 Mld', pct: 62, stato: 'corso' },
-  { nome: 'Sardegna', cc: 53, oc: 14, fondi: '€0,44 Mld', pct: 38, stato: 'rischio' },
-  { nome: 'Abruzzo', cc: 42, oc: 11, fondi: '€0,37 Mld', pct: 50, stato: 'corso' },
-  { nome: 'Friuli-V.G.', cc: 31, oc: 8, fondi: '€0,28 Mld', pct: 70, stato: 'avanzato' },
-];
 
-const STATO_LABEL = { avanzato:'In anticipo', corso:'In corso', rischio:'A rischio', pianificato:'Pianificato' };
-const STATO_CLASS = { avanzato:'stato-avanzato', corso:'stato-corso', rischio:'stato-rischio', pianificato:'stato-pianificato' };
 
 /* ══════════════ PANEL SWITCH ══════════════ */
 function showPanel(id) {
@@ -1131,56 +1108,11 @@ function renderMisure() {
       </div>
       <div class="misura-importo">${m.importo} <span>stanziati</span></div>
       <div class="misura-desc">${m.desc}</div>
-      <div class="progress-wrap">
-        <div class="progress-label">
-          <span>${m.realizzati} / ${m.target} realizzati</span>
-          <span>${m.pct}%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill ${m.fill}" style="width:0%" data-target="${m.pct}%"></div>
-        </div>
-      </div>
-      <span class="stato-badge ${STATO_CLASS[m.stato]}">${STATO_LABEL[m.stato]}</span>
       <div style="font-size:10px;color:var(--ink3);margin-top:6px">Scadenza: ${m.scadenza}</div>
     </div>
   `).join('');
-
-  setTimeout(() => {
-    document.querySelectorAll('.progress-fill').forEach(el => {
-      el.style.width = el.dataset.target;
-    });
-  }, 100);
 }
 
-let allRegioni = [...REGIONI_DATA];
-
-function renderRegioni(data) {
-  const body = document.getElementById('regioni-body');
-  body.innerHTML = data.map(r => `
-    <tr>
-      <td class="td-regione">${r.nome}</td>
-      <td>${r.cc}</td>
-      <td>${r.oc}</td>
-      <td style="font-weight:500;color:var(--blue)">${r.fondi}</td>
-      <td>
-        <div class="mini-bar">
-          <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${r.pct}%;background:${r.pct>=65?'var(--green)':r.pct>=45?'var(--blue)':'var(--red)'}"></div></div>
-          <span style="font-size:11px;min-width:30px;text-align:right">${r.pct}%</span>
-        </div>
-      </td>
-      <td><span class="stato-badge ${STATO_CLASS[r.stato]}">${STATO_LABEL[r.stato]}</span></td>
-    </tr>
-  `).join('');
-}
-
-function filterRegioni(tipo, btn) {
-  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  const filtered = tipo === 'tutti' ? allRegioni :
-                   tipo === 'avanzato' ? allRegioni.filter(r => r.stato === 'avanzato') :
-                   allRegioni.filter(r => r.stato === 'rischio');
-  renderRegioni(filtered);
-}
 
 /* ══════════════ ASSISTANT ══════════════ */
 let uploadedFiles = [];
@@ -1500,7 +1432,15 @@ function calcolaEligibilita() {
 
 /* ══════════════ INIT ══════════════ */
 renderMisure();
-renderRegioni(REGIONI_DATA);
 </script>
+
+<footer class="hh-footer">
+  © 2026 HealthHorizon · progetto di Remo Pulcini, innovatore indipendente ·
+  <a href="index.html">Home</a> ·
+  <a href="prova.html">Prova in 3 minuti</a> ·
+  <a href="come-funziona.html">Come funziona e limiti</a> ·
+  <a href="privacy.html">Privacy</a> ·
+  <a href="mailto:info@quantumhorizon.it">info@quantumhorizon.it</a>
+</footer>
 </body>
 </html>
