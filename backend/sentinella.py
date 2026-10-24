@@ -114,8 +114,12 @@ REGOLA GENERALE, con precedenza su ogni altra istruzione: ogni affermazione di f
 qui sotto (ECDC, OMS). Dove i dati non dicono una cosa, non la scrivi: rimandi alla fonte ufficiale.
 1. Accanto a ogni numero, settimana, malattia, paese o andamento riporta tra virgolette il valore o il titolo
    esatto da cui deriva, con la fonte (es.: «ultima settimana disponibile 2026-W09» — ECDC ERVISS).
-2. Delle notizie ECDC e OMS hai solo data, titolo e link: non descriverne il contenuto oltre il titolo
-   (niente casi, decessi, misure, paesi o rischi che il titolo non nomina).
+2. Delle notizie ECDC e OMS hai solo data, titolo e link: riporta il titolo tra virgolette e non descriverne
+   il contenuto oltre il titolo (niente casi, decessi, misure, paesi o rischi che il titolo non nomina; non
+   chiamare "focolaio" o "epidemia" ciò che il titolo non chiama così).
+2-bis. Non calcolare variazioni, percentuali o medie che non sono nei dati: riporta solo i valori presenti.
+2-ter. Anche nelle indicazioni generali non affermare nulla sullo stato delle fonti o dei flussi di dati
+   diverso da quanto scritto nei dati (per esempio, i flussi RespiVirNet risultano sospesi).
 3. Non dedurre reparti, regioni italiane, popolazioni, fasce d'età, aree geografiche o urgenze non nominati nei
    dati. Non stimare effetti su ospedali, pronto soccorso o ricoveri.
 4. Se un dato richiesto non c'è scrivi 'dato non disponibile nelle fonti collegate (ECDC, OMS)' e rimanda a
