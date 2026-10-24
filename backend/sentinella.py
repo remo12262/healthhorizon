@@ -139,6 +139,19 @@ async def simulate(req: SimRequest):
     if ranges:
         context += ("\nDate esatte delle settimane ISO citate (da lunedì a domenica; usa queste, non ricalcolarle): "
                     + "; ".join(ranges) + ".")
+    # Elenco esplicito dei valori ufficiali: il modello li etichettava a volte come letteratura generale
+    official = []
+    ind = s.get("indicator", "ari")
+    if s.get("series") and s["series"][-1].get(ind) is not None:
+        official.append(f"incidenza {ind.upper()} {s['series'][-1][ind]} casi per 1.000 assistiti (settimana {s['latest_week']})")
+    names = {"rsv": "RSV", "influenza": "influenza", "sars_cov_2": "SARS-CoV-2"}
+    for k, v in (s.get("positivity") or {}).items():
+        if v is not None and k in names:
+            official.append(f"positività {names[k]} {v}% (settimana {s['positivity_week']})")
+    if official:
+        context += ("\nQuesti valori sono dati ufficiali italiani RespiVirNet: " + "; ".join(official)
+                    + ". Ogni volta che compaiono nel testo devono essere etichettati come «(dato ufficiale italiano, "
+                      "fonte e settimana)», anche se sono nella stessa frase di considerazioni generali.")
     prompt = (f"Scenario ipotetico al {today}: aumento del {req.incremento}% dell'incidenza delle infezioni respiratorie, "
               f"durata {req.durata} settimane, copertura vaccinale {req.copertura_vaccinale}%, fascia d'età {req.fascia_eta}. "
               "Parti dall'ultimo dato reale disponibile indicato sotto (dichiarando la settimana di riferimento) e descrivi "
