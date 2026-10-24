@@ -146,7 +146,9 @@ async def simulate(req: SimRequest):
               "Chiarisci che è una proiezione ragionata e non un modello epidemiologico validato; non presentare stime come dati.\n"
               "Accanto a OGNI valore numerico (percentuali, soglie, durate, numeri di casi), in ogni sezione compresi i trigger, "
               "indica SEMPRE tra parentesi da dove deriva: «(dato ufficiale italiano, fonte e settimana)» se è nei dati reali "
-              "qui sotto, oppure «(letteratura generale, non dato italiano)» se è un valore di riferimento generale. "
+              "qui sotto, «(parametro dello scenario o calcolo)» se è un parametro scelto dall'utente o un valore ricavato "
+              "da un calcolo o da un'ipotesi sui dati, oppure «(letteratura generale, non dato italiano)» se è un valore "
+              "di riferimento generale. "
               "Non inventare fonti specifiche.\n"
               "Sii conciso: massimo 450 parole.\n\n"
               + context)
