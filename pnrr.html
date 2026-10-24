@@ -888,6 +888,7 @@ a.nav-logo { text-decoration: none; }
 <div style="padding:2rem 2rem 0">
   <div class="section-title">Avanzamento Missione 6</div>
   <div class="section-sub">Dati indicativi inseriti manualmente, con riferimento a Italia Domani / Ministero della Salute: non aggiornati in automatico, verificare sulle fonti ufficiali</div>
+  <div class="section-sub">Le scadenze delle misure vanno verificate su Italia Domani e sugli avvisi della propria Regione.</div>
 </div>
 
 <div style="padding:0 2rem">
@@ -985,7 +986,7 @@ a.nav-logo { text-decoration: none; }
 <div class="panel" id="panel-eligibilita">
 <div style="padding:2rem 2rem 1rem">
   <div class="section-title">Calcolatore Eligibilità PNRR</div>
-  <div class="section-sub">Inserisci i parametri del tuo ente. Il sistema identifica le misure PNRR disponibili con importi e scadenze, inseriti manualmente e non aggiornati in automatico.</div>
+  <div class="section-sub">Inserisci i parametri del tuo ente. Il sistema identifica le misure PNRR disponibili con importi indicativi, inseriti manualmente e non aggiornati in automatico. Le scadenze delle misure vanno verificate su Italia Domani e sugli avvisi della propria Regione.</div>
 </div>
 <div style="padding:0 2rem 2rem">
 <div class="eligibilita-layout">
@@ -1073,17 +1074,17 @@ const API_BASE = 'https://healthhorizon-lw08.onrender.com';
 ══════════════════════════════ */
 const MISURE = [
   { icon: '🏠', nome: 'Case della Comunità', importo: '€2,0 Mld',
-    desc: 'Strutture di prossimità per cure primarie e medicina territoriale.', scadenza: 'Dic 2026' },
+    desc: 'Strutture di prossimità per cure primarie e medicina territoriale.' },
   { icon: '🏥', nome: 'Ospedali di Comunità', importo: '€1,0 Mld',
-    desc: 'Strutture intermedie per ricoveri brevi a bassa intensità clinica.', scadenza: 'Dic 2026' },
+    desc: 'Strutture intermedie per ricoveri brevi a bassa intensità clinica.' },
   { icon: '📡', nome: 'Centrali Operative Territoriali', importo: '€0,3 Mld',
-    desc: 'Nodi di coordinamento tra territorio, 118 e reti di emergenza.', scadenza: 'Giu 2026' },
+    desc: 'Nodi di coordinamento tra territorio, 118 e reti di emergenza.' },
   { icon: '💻', nome: 'Telemedicina', importo: '€1,0 Mld',
-    desc: 'Piattaforme per teleconsulto, telemonitoraggio e teleassistenza.', scadenza: 'Set 2025' },
+    desc: 'Piattaforme per teleconsulto, telemonitoraggio e teleassistenza.' },
   { icon: '🔬', nome: 'Ammodernamento tecnologico', importo: '€4,05 Mld',
-    desc: 'TAC, risonanze, acceleratori lineari e grandi apparecchiature.', scadenza: 'Mar 2026' },
+    desc: 'TAC, risonanze, acceleratori lineari e grandi apparecchiature.' },
   { icon: '🗂️', nome: 'Fascicolo Sanitario Elettronico', importo: '€1,38 Mld',
-    desc: 'Adeguamento FSE 2.0 in tutte le regioni italiane.', scadenza: 'Dic 2025' }
+    desc: 'Adeguamento FSE 2.0 in tutte le regioni italiane.' }
 ];
 
 
@@ -1107,7 +1108,6 @@ function renderMisure() {
       </div>
       <div class="misura-importo">${m.importo} <span>stanziati</span></div>
       <div class="misura-desc">${m.desc}</div>
-      <div style="font-size:10px;color:var(--ink3);margin-top:6px">Scadenza: ${m.scadenza}</div>
     </div>
   `).join('');
 }
@@ -1209,7 +1209,7 @@ const OFFICIAL_SOURCES = [
 function aiNote(text) {
   const note = document.createElement('div');
   note.style.cssText = 'margin-top:10px;padding:10px 14px;background:var(--bg2);border-radius:8px;font-size:11px;color:var(--ink2);line-height:1.6';
-  let html = "<strong>Risposta generata con IA.</strong> Importi e scadenze dell'app sono inseriti manualmente, non aggiornati in automatico.";
+  let html = "<strong>Risposta generata con IA.</strong> Gli importi dell'app sono indicativi, inseriti manualmente e non aggiornati in automatico. Le scadenze delle misure vanno verificate su Italia Domani e sugli avvisi della propria Regione.";
   if ((text || '').includes(VERIFY_MARK)) {
     html += '<div style="margin-top:4px">Fonti ufficiali per la verifica: ' + OFFICIAL_SOURCES.map(([url, name, what]) =>
       '<a href="' + url + '" target="_blank" rel="noopener">' + name + '</a> (' + what + ')').join(' · ') + '</div>';
@@ -1307,7 +1307,6 @@ const MISURE_DB = [
     enti: ['asl','comune','regione'],
     bacini: ['15k-50k','50k-150k','150k-500k','sopra500k'],
     interessi: ['case_comunita'],
-    scadenza: '31 Dicembre 2026',
     docs: ['Progetto esecutivo', 'CUP', 'Accordo con MMG', 'Planimetrie'],
     componente: 'M6C1 — Misura 1.1'
   },
@@ -1318,7 +1317,6 @@ const MISURE_DB = [
     enti: ['asl','azienda-ospedaliera','irccs'],
     bacini: ['50k-150k','150k-500k','sopra500k'],
     interessi: ['ospedali_comunita'],
-    scadenza: '31 Dicembre 2026',
     docs: ['Progetto strutturale', 'Delibera aziendale', 'Piano gestionale', 'CUP'],
     componente: 'M6C1 — Misura 1.3'
   },
@@ -1329,7 +1327,6 @@ const MISURE_DB = [
     enti: ['asl','regione'],
     bacini: ['15k-50k','50k-150k','150k-500k','sopra500k'],
     interessi: ['cot'],
-    scadenza: '30 Giugno 2026',
     docs: ['Piano operativo', 'Accordo interistituzionale', 'Profili professionali'],
     componente: 'M6C1 — Misura 1.2'
   },
@@ -1340,7 +1337,6 @@ const MISURE_DB = [
     enti: ['asl','azienda-ospedaliera','irccs','regione'],
     bacini: ['50k-150k','150k-500k','sopra500k'],
     interessi: ['telemedicina'],
-    scadenza: '30 Settembre 2025',
     docs: ['Capitolato tecnico', 'Piano formazione', 'DPIA privacy', 'Accordo con MMG'],
     componente: 'M6C1 — Misura 1.2.3'
   },
@@ -1351,7 +1347,6 @@ const MISURE_DB = [
     enti: ['asl','azienda-ospedaliera','irccs','privato-accreditato'],
     bacini: ['50k-150k','150k-500k','sopra500k'],
     interessi: ['tecnologie'],
-    scadenza: '31 Marzo 2026',
     docs: ['Progetto di acquisto', 'Piano installazione', 'Collaudo impianti', 'CUP'],
     componente: 'M6C2 — Misura 1.1'
   },
@@ -1362,7 +1357,6 @@ const MISURE_DB = [
     enti: ['asl','azienda-ospedaliera','irccs','regione'],
     bacini: ['15k-50k','50k-150k','150k-500k','sopra500k'],
     interessi: ['digitale'],
-    scadenza: '31 Dicembre 2025',
     docs: ['Piano di adeguamento IT', 'Accordo regionale', 'Nomina DPO', 'Cronoprogramma'],
     componente: 'M6C2 — Misura 1.3'
   },
@@ -1373,7 +1367,6 @@ const MISURE_DB = [
     enti: ['asl','azienda-ospedaliera','irccs'],
     bacini: ['50k-150k','150k-500k','sopra500k'],
     interessi: ['tecnologie'],
-    scadenza: '31 Dicembre 2026',
     docs: ['Progetto strutturale', 'VVF', 'Collaudo tecnico-amministrativo', 'CUP'],
     componente: 'M6C2 — Misura 1.2'
   }
@@ -1437,7 +1430,6 @@ function calcolaEligibilita() {
         <div style="font-size:10px;color:var(--blue);font-weight:600;margin-bottom:5px">${m.componente}</div>
         <div class="misura-result-desc">${m.desc}</div>
         <div class="misura-result-tags">
-          <span class="tag scadenza-tag">⏱ Scadenza: ${m.scadenza}</span>
           ${m.docs.map(d => `<span class="tag doc-tag">📎 ${d}</span>`).join('')}
         </div>
       </div>
@@ -1445,7 +1437,7 @@ function calcolaEligibilita() {
     <div style="margin-top:1.5rem;padding:12px 16px;background:var(--gold-light);border-radius:var(--radius);border-left:3px solid var(--gold)">
       <div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:4px">⚠️ Nota importante</div>
       <div style="font-size:11px;color:var(--ink2);line-height:1.6">
-        I valori indicati sono stime orientative basate sui parametri PNRR pubblici, inserite manualmente e non aggiornate in automatico. Gli importi effettivi dipendono dai piani regionali, dai bandi specifici e dalla disponibilità residua. Verifica sempre sul portale <strong>Italia Domani</strong> e con la tua regione di riferimento.
+        I valori indicati sono stime orientative basate sui parametri PNRR pubblici, inserite manualmente e non aggiornate in automatico. Gli importi effettivi dipendono dai piani regionali, dai bandi specifici e dalla disponibilità residua. Verifica sempre sul portale <strong>Italia Domani</strong> e con la tua regione di riferimento. Le scadenze delle misure vanno verificate su Italia Domani e sugli avvisi della propria Regione.
       </div>
     </div>
   `;
