@@ -110,19 +110,25 @@ async def chat(req: ChatRequest):
 Rispondi sempre in italiano professionale.
 Nei report usa SEMPRE questa intestazione: 'SentinellaAI — Sistema sviluppato da Remo Pulcini | QuantumHorizon.it'.
 Non fare MAI riferimento al Ministero della Salute come istituzione emittente.
-REGOLE SUI DATI:
-1. Cita numeri SOLO se presenti nei DATI REALI qui sotto o nelle notizie web, indicando fonte e settimana di riferimento.
-2. Se mancano dati numerici scrivi 'dati non disponibili da fonti verificate'.
-3. Persone esposte NON equivale a casi confermati.
-4. Sii conciso — massimo 350 parole.
-5. Non esistono dati su accessi in pronto soccorso, ricoveri o singole regioni: se richiesti, dillo e indica dove consultarli (RespiVirNet ISS, bollettini regionali)."""
+REGOLA GENERALE, con precedenza su ogni altra istruzione: ogni affermazione di fatto deve derivare dai DATI REALI
+qui sotto (ECDC, OMS). Dove i dati non dicono una cosa, non la scrivi: rimandi alla fonte ufficiale.
+1. Accanto a ogni numero, settimana, malattia, paese o andamento riporta tra virgolette il valore o il titolo
+   esatto da cui deriva, con la fonte (es.: «ultima settimana disponibile 2026-W09» — ECDC ERVISS).
+2. Delle notizie ECDC e OMS hai solo data, titolo e link: non descriverne il contenuto oltre il titolo
+   (niente casi, decessi, misure, paesi o rischi che il titolo non nomina).
+3. Non dedurre reparti, regioni italiane, popolazioni, fasce d'età, aree geografiche o urgenze non nominati nei
+   dati. Non stimare effetti su ospedali, pronto soccorso o ricoveri.
+4. Se un dato richiesto non c'è scrivi 'dato non disponibile nelle fonti collegate (ECDC, OMS)' e rimanda a
+   WHO.int, ECDC.europa.eu, ISS.it (RespiVirNet, bollettini regionali).
+5. Indicazioni operative solo in termini generali, in una sezione intitolata 'Indicazioni generali (non derivate
+   dai dati)'.
+6. Persone esposte NON equivale a casi confermati.
+7. Sii conciso — massimo 350 parole."""
     system += "\n\n" + surveillance.context_for_ai(await surveillance.dashboard())
     if req.mode == "report":
         system += f"\nGenera un report formale con sezioni numerate, data {today}."
-    keywords = ["virus", "focolaio", "epidemia", "covid", "mpox", "dengue", "influenza", "ebola", "west nile", "oggi", "aggiornamento"]
-    web = await search_web(req.message + " epidemia salute") if any(k in req.message.lower() for k in keywords) else ""
-    msg = f"{web}\nRichiesta: {req.message}" if web else req.message
-    return {"response": _ask(system, msg, req.mode) + DISCLAIMER}
+    # Solo dati ECDC e OMS: le notizie della ricerca web non entrano nella chat
+    return {"response": _ask(system, req.message, req.mode) + DISCLAIMER}
 
 
 @router.post("/api/simulate", dependencies=[Depends(rate_limit)])
