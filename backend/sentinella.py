@@ -72,9 +72,17 @@ async def search_web(query: str) -> str:
         return ""
 
 
-def _ask(system: str, content: str, label: str) -> str:
+def _cut_to_last_sentence(text: str) -> str:
+    """Testo troncato dal limite di token: si tiene fino all'ultima frase completa, mai a metà parola."""
+    end = max(text.rfind(p) for p in (".", "!", "?", ":"))
+    if end > 0:
+        text = text[:end + 1]
+    return text.rstrip() + "\n\n(Risposta abbreviata per limite di lunghezza.)"
+
+
+def _ask(system: str, content: str, label: str, max_tokens: int = 1500, cut_truncated: bool = False) -> str:
     try:
-        resp = client.messages.create(model=MODEL, max_tokens=1500, system=system,
+        resp = client.messages.create(model=MODEL, max_tokens=max_tokens, system=system,
                                       messages=[{"role": "user", "content": content}])
     except anthropic.APIError as e:
         print(f"[sentinella] ERRORE Claude ({label}): {type(e).__name__}: {e}")
@@ -82,7 +90,11 @@ def _ask(system: str, content: str, label: str) -> str:
             raise HTTPException(503, "Analisi AI non disponibile: credito del servizio AI esaurito. I dati del cruscotto restano consultabili.")
         raise HTTPException(503, "Analisi AI momentaneamente non disponibile. Riprova tra qualche minuto.")
     costs.record(MODEL, resp, f"sentinella-{label}")
-    return "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+    text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+    if cut_truncated and resp.stop_reason == "max_tokens":
+        print(f"[sentinella] risposta troncata dal limite di token ({label}): tagliata all'ultima frase completa")
+        text = _cut_to_last_sentence(text)
+    return text
 
 
 @router.post("/api/chat", dependencies=[Depends(rate_limit)])
@@ -123,7 +135,12 @@ async def simulate(req: SimRequest):
               f"durata {req.durata} settimane, copertura vaccinale {req.copertura_vaccinale}%, fascia d'età {req.fascia_eta}. "
               "Parti dall'ultimo dato reale disponibile indicato sotto (dichiarando la settimana di riferimento) e descrivi "
               "in modo qualitativo l'impatto atteso su casi, ricoveri, pronto soccorso e saturazione, con una raccomandazione. "
-              "Chiarisci che è una proiezione ragionata e non un modello epidemiologico validato; non presentare stime come dati.\n\n"
+              "Chiarisci che è una proiezione ragionata e non un modello epidemiologico validato; non presentare stime come dati.\n"
+              "Accanto a OGNI valore numerico (percentuali, soglie, durate, numeri di casi), in ogni sezione compresi i trigger, "
+              "indica SEMPRE tra parentesi da dove deriva: «(dato ufficiale italiano, fonte e settimana)» se è nei dati reali "
+              "qui sotto, oppure «(letteratura generale, non dato italiano)» se è un valore di riferimento generale. "
+              "Non inventare fonti specifiche.\n"
+              "Sii conciso: massimo 450 parole.\n\n"
               + context)
     system = "Sei SentinellaAI sviluppato da Remo Pulcini di QuantumHorizon.it. Rispondi in italiano professionale."
-    return {"response": _ask(system, prompt, "simulate") + DISCLAIMER}
+    return {"response": _ask(system, prompt, "simulate", max_tokens=3000, cut_truncated=True) + DISCLAIMER}
