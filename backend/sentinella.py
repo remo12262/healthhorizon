@@ -130,7 +130,15 @@ async def simulate(req: SimRequest):
     if not try_consume_ai_call():
         return {"response": LIMIT_MSG}
     today = datetime.now().strftime("%d/%m/%Y")
-    context = surveillance.context_for_ai(await surveillance.dashboard())
+    data = await surveillance.dashboard()
+    context = surveillance.context_for_ai(data)
+    # Date delle settimane ISO calcolate qui: il modello non deve dedurle (sbagliava di un giorno)
+    s = (data or {}).get("surveillance") or {}
+    weeks = sorted({r["week"] for r in s.get("series", [])[-6:]} | ({s["positivity_week"]} if s.get("positivity_week") else set()))
+    ranges = [f"{w} = {surveillance.week_range(w)}" for w in weeks if surveillance.week_range(w)]
+    if ranges:
+        context += ("\nDate esatte delle settimane ISO citate (da lunedì a domenica; usa queste, non ricalcolarle): "
+                    + "; ".join(ranges) + ".")
     prompt = (f"Scenario ipotetico al {today}: aumento del {req.incremento}% dell'incidenza delle infezioni respiratorie, "
               f"durata {req.durata} settimane, copertura vaccinale {req.copertura_vaccinale}%, fascia d'età {req.fascia_eta}. "
               "Parti dall'ultimo dato reale disponibile indicato sotto (dichiarando la settimana di riferimento) e descrivi "

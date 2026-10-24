@@ -61,6 +61,16 @@ def week_end(yw: str):
         return None
 
 
+def week_range(yw: str):
+    """Date della settimana ISO, da lunedì a domenica: «23/02/2026 – 01/03/2026»."""
+    y, w = _week_key(yw)
+    try:
+        start = date.fromisocalendar(y, w, 1)
+    except ValueError:
+        return None
+    return f"{start:%d/%m/%Y} – {start + timedelta(days=6):%d/%m/%Y}"
+
+
 def _weeks_ago(yw: str) -> int:
     y, w = _week_key(yw)
     try:
